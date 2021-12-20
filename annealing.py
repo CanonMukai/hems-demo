@@ -466,8 +466,9 @@ def lineGraphDemand1(y1,start=0):
     ax.set_ylabel('需要(W)')
     ax.grid(axis='both')
     ax.set_title('需要')
-    plt.show()
-    fig.savefig('時系列需要.png',bbox_inches='tight')
+    # plt.show()
+    # fig.savefig('時系列需要.png',bbox_inches='tight')
+
 
 
 ### 出力結果を図示する関数 ###
