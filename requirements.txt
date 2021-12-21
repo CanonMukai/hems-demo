@@ -3,5 +3,5 @@ dimod==0.9.15
 pandas==1.0.5
 numpy==1.18.5
 dwave-neal==0.5.7
-matplotlib
+matplotlib==3.2.2
 dwave-ocean-sdk==3.4.1
