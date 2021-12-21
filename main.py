@@ -1,5 +1,5 @@
 import streamlit as st
-from annealing import *
+# from annealing import *
 
 ############################################
 # Streamlit 全体の設定
