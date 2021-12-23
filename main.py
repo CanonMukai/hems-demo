@@ -14,6 +14,16 @@ st.set_page_config(
 
 
 ############################################
+# 最適化関数 callback用
+############################################
+
+def solve():
+    with st.spinner('計算中です...'):
+        solve_DA()
+    simple_demo_page()
+
+
+############################################
 # Page 関数
 ############################################
 
@@ -52,8 +62,10 @@ def create_form(obj):
             "マシン",
             ["デジタルアニーラ", "Amplify"],
         )
-        submitted = st.form_submit_button("スケジューリング！")
-        if submitted: pass
+        submitted = st.form_submit_button(
+            label="スケジューリング！",
+            on_click=solve,
+        )
 
 def common_first():
     # タイトル
