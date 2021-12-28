@@ -5,3 +5,4 @@ numpy==1.18.5
 dwave-neal==0.5.7
 matplotlib==3.2.2
 dwave-ocean-sdk==3.4.1
+-e git://github.com/CanonMukai/hemsq-prototype.git@develop
