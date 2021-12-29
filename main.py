@@ -1,5 +1,6 @@
 import streamlit as st
 from annealing import *
+from hemsq import Params
 
 ############################################
 # Streamlit 全体の設定
@@ -70,6 +71,8 @@ def create_form(obj):
 def common_first():
     # タイトル
     st.title("HEMS エネルギー最適化")
+    p = Params()
+    st.write("unit: {}".format(p.unit))
 
 def common_last():
     # ページ遷移ボタン
