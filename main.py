@@ -58,10 +58,6 @@ def create_form(obj):
                 "5人世帯 (日中在宅3人）",
             )
         )
-        machine = st.radio(
-            "マシン",
-            ["デジタルアニーラ", "Amplify"],
-        )
         submitted = st.form_submit_button(
             label="スケジューリング！",
             on_click=solve,
@@ -70,17 +66,17 @@ def create_form(obj):
 def common_first():
     # タイトル
     st.title("HEMS エネルギー最適化")
-
-def common_last():
     # ページ遷移ボタン
     create_transition_button(st.sidebar)
 
+def common_last():
+    pass
+
 def simple_demo_page():
     common_first()
-    col1, col2, col3 = st.columns([1, 3, 2])
-    create_form(col1)
-    col2.write("アニーリングマシンの結果")
-    col3.write("従来法の結果")
+    params_col, result_col = st.columns([1, 4])
+    create_form(params_col)
+    result_col.write("結果")
     common_last()
 
 def detailed_demo_page():
@@ -102,6 +98,31 @@ def explanation_page():
     st.write("※このプロジェクトは未踏ターゲット事務局によりサポートして頂いています。")
     common_last()
 
+def hemsq_page():
+    common_first()
+    st.write(
+        "Pythonパッケージ `HemsQ` を使用することで"
+        "より詳細なパラメータを試すことが可能です。"
+        "フィックスターズ社の Fixtars Amplify AE と併用する形になります。")
+    st.write("以下のコマンドでインストールしてください。")
+    st.code("""
+$ pip install git+https://github.com/CanonMukai/hemsq-prototype.git
+$ pip install amplify
+    """)
+    st.write("次のようにインポートし、オブジェクトを作成します。")
+    st.code("""
+from hemsq import HemsQ
+hq = HemsQ()
+    """, language="python")
+    st.write(
+        "また `amplify` も同様にインポートし、"
+        "マシンのクライアントの設定を行ってください。")
+    st.code("""
+from amplify.client import XXXClient
+client = XXXClient()
+hq.set_client(client)
+    """, language="python")
+    common_last()
 
 ############################################
 # Page Class の設定と constant 化
@@ -122,6 +143,7 @@ class Page:
 SIMPLE_DEMO_PAGE = Page("簡易デモページ", simple_demo_page)
 DETAILED_DEMO_PAGE = Page("詳細デモページ", detailed_demo_page)
 EXPLANATION_PAGE = Page("説明ページ", explanation_page)
+HEMSQ_PAGE = Page("HemsQ詳細ページ", hemsq_page)
 
 
 ############################################
@@ -133,8 +155,9 @@ if "init" not in st.session_state:
     st.session_state.init = True
 st.session_state.pages = [
     SIMPLE_DEMO_PAGE,
-    DETAILED_DEMO_PAGE,
+    # DETAILED_DEMO_PAGE,
     EXPLANATION_PAGE,
+    HEMSQ_PAGE,
 ]
 
 
