@@ -28,8 +28,7 @@ def solve(token=None):
         client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
         hq.set_client(client)
         hq.solve()
-        opr = hq.all_params_and_result[-1]
-    simple_demo_page(opr=opr)
+    simple_demo_page(hq=hq)
 
 
 ############################################
@@ -85,14 +84,13 @@ def common_first():
 def common_last():
     pass
 
-def simple_demo_page(opr=None):
+def simple_demo_page(hq=None):
     common_first()
     params_col, result_col = st.columns([1, 4])
     create_form(params_col)
     result_col.write("結果")
-    if opr:
-        hq = HemsQ()
-        hq.show_all(result=opr)
+    if hq:
+        hq.show_all()
     common_last()
 
 def detailed_demo_page():
