@@ -1,5 +1,6 @@
 import streamlit as st
-from annealing import *
+from amplify.client import FixstarsClient
+from hemsq import HemsQ
 
 ############################################
 # Streamlit 全体の設定
@@ -17,10 +18,18 @@ st.set_page_config(
 # 最適化関数 callback用
 ############################################
 
-def solve():
+def solve(token=None):
     with st.spinner('計算中です...'):
-        solve_DA()
-    simple_demo_page()
+        hq = HemsQ()
+        client = FixstarsClient()
+        client.token = token
+        client.parameters.timeout = 1000 # タイムアウト1秒
+        client.parameters.outputs.num_outputs = 0
+        client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
+        hq.set_client(client)
+        hq.solve()
+        opr = hq.all_params_and_result[-1]
+    simple_demo_page(opr=opr)
 
 
 ############################################
@@ -58,9 +67,13 @@ def create_form(obj):
                 "5人世帯 (日中在宅3人）",
             )
         )
+        token = st.text_input('Amplify のアクセストークン', type='password')
         submitted = st.form_submit_button(
             label="スケジューリング！",
             on_click=solve,
+            kwargs={
+                'token': token,
+            },
         )
 
 def common_first():
@@ -72,11 +85,14 @@ def common_first():
 def common_last():
     pass
 
-def simple_demo_page():
+def simple_demo_page(opr=None):
     common_first()
     params_col, result_col = st.columns([1, 4])
     create_form(params_col)
     result_col.write("結果")
+    if opr:
+        hq = HemsQ()
+        hq.show_all(result=opr)
     common_last()
 
 def detailed_demo_page():
