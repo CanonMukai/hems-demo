@@ -90,7 +90,18 @@ def simple_demo_page(hq=None):
     create_form(params_col)
     result_col.write("結果")
     if hq:
-        hq.show_all()
+        fig, ax = hq.return_schedule1()
+        result_col.pyplot(fig)
+        fig, ax = hq.return_schedule2()
+        result_col.pyplot(fig)
+        fig, ax = hq.return_demand()
+        result_col.pyplot(fig)
+        fig, ax = hq.return_solar()
+        result_col.pyplot(fig)
+        fig, ax = hq.return_cost_and_charge()
+        result_col.pyplot(fig)
+        fig, ax = hq.return_cost_and_use()
+        result_col.pyplot(fig)
     common_last()
 
 def detailed_demo_page():
