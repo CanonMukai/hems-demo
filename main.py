@@ -75,6 +75,43 @@ def create_form(obj):
             },
         )
 
+def cost_message(val):
+    # コスト
+    texts = []
+    if val['cost'] >= 0:
+        texts.append('コスト: {} 円'.format(val['cost']))
+    else:
+        texts.append('売り上げ: {} 円'.format(-val['cost']))
+    # CO2排出量（0.445kg/kWh)
+    texts.append('CO2排出量: {} kg'.format(val['CO2']))
+    return '\n'.join(texts)
+
+def create_result(obj, hq):
+    # コストの表示
+    obj.write('1日のコスト')
+    val = hq.cost_dict()
+    obj.write(cost_message(val))
+    # スケジュール表の表示
+    obj.write('スケジュール')
+    obj.write('pltの表')
+    fig1, ax1 = hq.all_table_fig()
+    obj.pyplot(fig1)
+    obj.write('dfの表')
+    obj.dataframe(hq.all_table_df())
+    # 需要のグラフ
+    fig2, ax2 = hq.demand_graph()
+    obj.pyplot(fig2)
+    # 太陽光のグラフ
+    fig3, ax3 = hq.solar_graph()
+    obj.pyplot(fig3)
+    # コストと充電のグラフ
+    fig4, ax4 = hq.cost_and_charge_graph()
+    obj.pyplot(fig4)
+    # コストと使用のグラフ
+    fig5, ax5 = hq.cost_and_use_graph()
+    obj.pyplot(fig5)
+
+
 def common_first():
     # タイトル
     st.title("HEMS エネルギー最適化")
@@ -90,18 +127,7 @@ def simple_demo_page(hq=None):
     create_form(params_col)
     result_col.write("結果")
     if hq:
-        fig, ax = hq.return_schedule1()
-        result_col.pyplot(fig)
-        fig, ax = hq.return_schedule2()
-        result_col.pyplot(fig)
-        fig, ax = hq.return_demand()
-        result_col.pyplot(fig)
-        fig, ax = hq.return_solar()
-        result_col.pyplot(fig)
-        fig, ax = hq.return_cost_and_charge()
-        result_col.pyplot(fig)
-        fig, ax = hq.return_cost_and_use()
-        result_col.pyplot(fig)
+        create_result(result_cos, hq)
     common_last()
 
 def detailed_demo_page():

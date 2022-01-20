@@ -6,4 +6,4 @@ dwave-neal==0.5.7
 matplotlib==3.2.2
 dwave-ocean-sdk==3.4.1
 amplify==0.6.5
--e git://github.com/CanonMukai/hemsq-prototype.git@return-fig#egg=hemsq
+-e git://github.com/CanonMukai/hemsq-prototype.git@modify-opr#egg=hemsq
