@@ -19,7 +19,8 @@ st.set_page_config(
 ############################################
 
 def solve(tenki_name=None, demand_pattern=None, token=None):
-    with st.spinner('計算中です...'):
+    emoji = st.session_state.params['tenki_emoji'][tenki_name]
+    with st.spinner('計算中です...{}'.format(emoji)):
         hq = HemsQ()
         # パラメータの設定
         demand = st.session_state.params['demand'][demand_pattern]
@@ -222,6 +223,11 @@ if 'params' not in st.session_state:
             '晴れ': ['s' for i in range(8)],
             '曇り': ['c' for i in range(8)],
             '雨': ['r' for i in range(8)],
+        },
+        'tenki_emoji': {
+            '晴れ': ':sunny:',
+            '曇り': ':cloud:',
+            '雨': ':umbrella:',
         },
         'demand': {
             '少し使いすぎな2人世帯 (日中在宅0人)': [550,450,360,350,350,400,420,710,710,620,590,450,450,410,410,410,410,440,500,670,690,670,670,650],
