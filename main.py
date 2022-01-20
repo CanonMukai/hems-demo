@@ -52,35 +52,36 @@ def create_transition_button(obj):
             )
 
 def create_form(obj):
-    with obj.form("form"):
-        tenki = st.selectbox(
-            "天気",
-            (
-                "晴れ",
-                "曇り",
-                "雨",
+    with obj:
+        with st.form("form"):
+            tenki = st.selectbox(
+                "天気",
+                (
+                    "晴れ",
+                    "曇り",
+                    "雨",
+                )
             )
-        )
-        demand_pattern = st.selectbox(
-            "需要パターン",
-            (
-                "少し使いすぎな2人世帯 (日中在宅0人)",
-                "省エネ上手な3人家族 (日中在宅2人)",
-                "2人世帯平均 (日中在宅2人)",
-                "3人世帯 (日中在宅2人)",
-                "5人世帯 (日中在宅3人）",
+            demand_pattern = st.selectbox(
+                "需要パターン",
+                (
+                    "少し使いすぎな2人世帯 (日中在宅0人)",
+                    "省エネ上手な3人家族 (日中在宅2人)",
+                    "2人世帯平均 (日中在宅2人)",
+                    "3人世帯 (日中在宅2人)",
+                    "5人世帯 (日中在宅3人）",
+                )
             )
-        )
-        token = st.text_input('Amplify のアクセストークン', type='password')
-        submitted = st.form_submit_button(
-            label="スケジューリング！",
-            on_click=solve,
-            kwargs={
-                'tenki_name': tenki,
-                'demand_pattern': demand_pattern,
-                'token': token,
-            },
-        )
+            token = st.text_input('Amplify のアクセストークン', type='password')
+            submitted = st.form_submit_button(
+                label="スケジューリング！",
+                on_click=solve,
+                kwargs={
+                    'tenki_name': tenki,
+                    'demand_pattern': demand_pattern,
+                    'token': token,
+                },
+            )
 
 def cost_message(val):
     # コスト
