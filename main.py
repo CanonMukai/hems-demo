@@ -18,9 +18,14 @@ st.set_page_config(
 # 最適化関数 callback用
 ############################################
 
-def solve(token=None):
+def solve(tenki_name=None, demand_pattern=None, token=None):
     with st.spinner('計算中です...'):
         hq = HemsQ()
+        # パラメータの設定
+        demand = st.session_state.params['demand'][demand_pattern]
+        tenki = st.session_state.params['tenki'][tenki_name]
+        hq.set_params(weather_list=tenki, demand_list=demand)
+        # クライアントの設定
         client = FixstarsClient()
         client.token = token
         client.parameters.timeout = 1000 # タイムアウト1秒
@@ -50,7 +55,6 @@ def create_form(obj):
         tenki = st.selectbox(
             "天気",
             (
-                "現在の天気予報",
                 "晴れ",
                 "曇り",
                 "雨",
@@ -59,7 +63,7 @@ def create_form(obj):
         demand_pattern = st.selectbox(
             "需要パターン",
             (
-                "少し使いすぎな2人世帯 (日中在宅2人)",
+                "少し使いすぎな2人世帯 (日中在宅0人)",
                 "省エネ上手な3人家族 (日中在宅2人)",
                 "2人世帯平均 (日中在宅2人)",
                 "3人世帯 (日中在宅2人)",
@@ -71,6 +75,8 @@ def create_form(obj):
             label="スケジューリング！",
             on_click=solve,
             kwargs={
+                'tenki_name': tenki,
+                'demand_pattern': demand_pattern,
                 'token': token,
             },
         )
@@ -210,7 +216,21 @@ st.session_state.pages = [
     EXPLANATION_PAGE,
     HEMSQ_PAGE,
 ]
-
+if 'params' not in st.session_state:
+    st.session_state.params = {
+        'tenki': {
+            '晴れ': ['s' for i in range(8)],
+            '曇り': ['c' for i in range(8)],
+            '雨': ['r' for i in range(8)],
+        },
+        'demand': {
+            '少し使いすぎな2人世帯 (日中在宅0人)': [550,450,360,350,350,400,420,710,710,620,590,450,450,410,410,410,410,440,500,670,690,670,670,650],
+            '省エネ上手な3人家族 (日中在宅2人)': [230,150,130,120,110,110,130,190,340,360,340,340,260,260,270,220,240,410,430,410,430,330,310,270],
+            '2人世帯平均 (日中在宅2人)': [207,177,147,157,157,167,228,330,381,391,351,311,341,341,311,310,320,331,372,542,549,509,438,318],
+            '3人世帯 (日中在宅2人)': [242,207,172,184,184,195,267,536,596,607,561,364,199,199,164,163,174,187,435,634,642,596,512,372],
+            '5人世帯 (日中在宅3人）': [290,248,206,220,220,234,319,462,533,547,491,435,527,527,485,484,498,513,521,759,769,713,613,445],
+        },
+    }
 
 ############################################
 # main
