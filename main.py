@@ -127,7 +127,7 @@ def simple_demo_page(hq=None):
     create_form(params_col)
     result_col.write("結果")
     if hq:
-        create_result(result_cos, hq)
+        create_result(result_col, hq)
     common_last()
 
 def detailed_demo_page():
