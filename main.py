@@ -54,7 +54,7 @@ def create_transition_button(obj):
 def create_form(obj):
     with obj:
         with st.form("form"):
-            tenki = st.selectbox(
+            tenki_name = st.selectbox(
                 "天気",
                 (
                     "晴れ",
@@ -75,13 +75,30 @@ def create_form(obj):
             token = st.text_input('Amplify のアクセストークン', type='password')
             submitted = st.form_submit_button(
                 label="スケジューリング！",
-                on_click=solve,
-                kwargs={
-                    'tenki_name': tenki,
-                    'demand_pattern': demand_pattern,
-                    'token': token,
-                },
+                # on_click=solve,
+                # kwargs={
+                #     'tenki_name': tenki_name,
+                #     'demand_pattern': demand_pattern,
+                #     'token': token,
+                # },
             )
+    if submitted:
+        emoji = st.session_state.params['tenki_emoji'][tenki_name]
+        with st.spinner('計算中です...{}'.format(emoji)):
+            hq = HemsQ()
+            # パラメータの設定
+            demand = st.session_state.params['demand'][demand_pattern]
+            tenki = st.session_state.params['tenki'][tenki_name]
+            hq.set_params(weather_list=tenki, demand_list=demand)
+            # クライアントの設定
+            client = FixstarsClient()
+            client.token = token
+            client.parameters.timeout = 1000 # タイムアウト1秒
+            client.parameters.outputs.num_outputs = 0
+            client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
+            hq.set_client(client)
+            hq.solve()
+        simple_demo_page(hq=hq)
 
 def cost_message(val):
     # コスト
