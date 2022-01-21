@@ -18,7 +18,10 @@ st.set_page_config(
 # 最適化関数 callback用
 ############################################
 
-def solve(tenki_name=None, demand_pattern=None, token=None):
+def solve():
+    tenki_name = st.session_state['tenki_name']
+    demand_pattern = st.session_state['demand_pattern']
+    token = st.session_state['token']
     emoji = st.session_state.params['tenki_emoji'][tenki_name]
     with st.spinner('計算中です...{}'.format(emoji)):
         hq = HemsQ()
@@ -60,7 +63,8 @@ def create_form(obj):
                     "晴れ",
                     "曇り",
                     "雨",
-                )
+                ),
+                key='tenki_name',
             )
             demand_pattern = st.selectbox(
                 "需要パターン",
@@ -70,12 +74,14 @@ def create_form(obj):
                     "2人世帯平均 (日中在宅2人)",
                     "3人世帯 (日中在宅2人)",
                     "5人世帯 (日中在宅3人）",
-                )
+                ),
+                key='demand_pattern',
             )
-            token = st.text_input('Amplify のアクセストークン', type='password')
+            token = st.text_input('Amplify のアクセストークン', type='password',
+                key='token')
             submitted = st.form_submit_button(
                 label="スケジューリング！",
-                # on_click=solve,
+                on_click=solve,
                 # kwargs={
                 #     'tenki_name': tenki_name,
                 #     'demand_pattern': demand_pattern,
