@@ -82,11 +82,6 @@ def create_form(obj):
             submitted = st.form_submit_button(
                 label="スケジューリング！",
                 on_click=solve,
-                # kwargs={
-                #     'tenki_name': tenki_name,
-                #     'demand_pattern': demand_pattern,
-                #     'token': token,
-                # },
             )
 
 def cost_message(val):
