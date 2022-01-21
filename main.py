@@ -88,25 +88,6 @@ def create_form(obj):
                 #     'token': token,
                 # },
             )
-            print("come here")
-            if submitted:
-                print("in if-statement")
-                emoji = st.session_state.params['tenki_emoji'][tenki_name]
-                with st.spinner('計算中です...{}'.format(emoji)):
-                    hq = HemsQ()
-                    # パラメータの設定
-                    demand = st.session_state.params['demand'][demand_pattern]
-                    tenki = st.session_state.params['tenki'][tenki_name]
-                    hq.set_params(weather_list=tenki, demand_list=demand)
-                    # クライアントの設定
-                    client = FixstarsClient()
-                    client.token = token
-                    client.parameters.timeout = 1000 # タイムアウト1秒
-                    client.parameters.outputs.num_outputs = 0
-                    client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
-                    hq.set_client(client)
-                    hq.solve()
-                simple_demo_page(hq=hq)
 
 def cost_message(val):
     # コスト
