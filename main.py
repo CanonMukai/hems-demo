@@ -2,6 +2,8 @@ import streamlit as st
 from amplify.client import FixstarsClient
 from hemsq import HemsQ
 
+from sub import my_round
+
 ############################################
 # Streamlit 全体の設定
 ############################################
@@ -58,7 +60,7 @@ def create_transition_button(obj):
 def create_form():
     with st.expander('パラメータ', expanded=st.session_state.form_expanded):
         with st.form('form'):
-            c1, c2, c3, c4 = st.columns([0.5, 2, 1, 4])
+            c1, c2, c3, c4 = st.columns([0.5, 2, 1, 2])
             c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
             c2.selectbox(
                 '需要パターン',
@@ -77,43 +79,7 @@ def create_form():
             with c4:
                 st.form_submit_button(label="スケジューリング！", on_click=solve)
 
-def cost_message(val):
-    # コスト
-    texts = []
-    if val['cost'] >= 0:
-        texts.append('コスト: {} 円'.format(val['cost']))
-    else:
-        texts.append('売り上げ: {} 円'.format(-val['cost']))
-    # CO2排出量（0.445kg/kWh)
-    texts.append('CO2排出量: {} kg'.format(val['CO2']))
-    return '\n'.join(texts)
-
-def create_result(obj, hq):
-    # コストの表示
-    obj.write('1日のコスト')
-    val = hq.cost_dict()
-    obj.write(cost_message(val))
-    # スケジュール表の表示
-    obj.write('スケジュール')
-    obj.write('pltの表')
-    fig1, ax1 = hq.all_table_fig()
-    obj.pyplot(fig1)
-    obj.write('dfの表')
-    obj.dataframe(hq.all_table_df())
-    # 需要のグラフ
-    fig2, ax2 = hq.demand_graph()
-    obj.pyplot(fig2)
-    # 太陽光のグラフ
-    fig3, ax3 = hq.solar_graph()
-    obj.pyplot(fig3)
-    # コストと充電のグラフ
-    fig4, ax4 = hq.cost_and_charge_graph()
-    obj.pyplot(fig4)
-    # コストと使用のグラフ
-    fig5, ax5 = hq.cost_and_use_graph()
-    obj.pyplot(fig5)
-
-def create_result_v2(hq):
+def create_result(hq):
     # column を分ける
     col1, col2 = st.columns([1, 3])
     # 天気
@@ -123,17 +89,18 @@ def create_result_v2(hq):
     col2.metric(label='需要パターン', value=st.session_state.demand_pattern)
     # コストの表示
     val = hq.cost_dict()
-    if val['cost'] >= 0:
-        col1.metric(label='コスト', value='{} 円'.format(val['cost']))
+    cost = my_round(val['cost'], digit=1)
+    if cost >= 0:
+        col1.metric(label='コスト', value='{} 円'.format(cost))
     else:
-        col1.metric(label='売り上げ', value='{} 円'.format(val['cost']))
+        col1.metric(label='売り上げ', value='{} 円'.format(cost))
     # CO2排出量（0.445kg/kWh)
-    col2.metric(label='CO2排出量', value='{} 円'.format(val['CO2']))
+    col2.metric(label='CO2排出量', value='{} kg'.format(val['CO2']))
 
     # スケジュール表の表示
-    st.write('スケジュール')
-    fig1, ax1 = hq.all_table_fig()
-    st.pyplot(fig1)
+    with st.expander('全スケジュール表'):
+        fig1, ax1 = hq.all_table_fig()
+        st.pyplot(fig1)
 
     # column を分ける
     col3, col4 = st.columns(2)
@@ -162,12 +129,8 @@ def common_last():
 def simple_demo_page(hq=None):
     common_first()
     create_form()
-    # params_col, result_col = st.columns([1, 4])
-    # create_form(params_col)
-    # result_col.write("結果")
     if hq:
-        # create_result(result_col, hq)
-        create_result_v2(hq)
+        create_result(hq)
     common_last()
 
 def detailed_demo_page():
