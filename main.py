@@ -155,9 +155,10 @@ def common_last():
 
 def simple_demo_page(hq=None):
     common_first()
+    create_form_v2()
     params_col, result_col = st.columns([1, 4])
-    create_form(params_col)
-    result_col.write("結果")
+    # create_form(params_col)
+    # result_col.write("結果")
     if hq:
         create_result(result_col, hq)
     common_last()
