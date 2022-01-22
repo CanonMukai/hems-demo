@@ -37,6 +37,7 @@ def solve():
         client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
         hq.set_client(client)
         hq.solve()
+    st.session_state.form_expanded = False
     simple_demo_page(hq=hq)
 
 
@@ -83,6 +84,28 @@ def create_form(obj):
                 label="スケジューリング！",
                 on_click=solve,
             )
+
+def create_form_v2():
+    with st.expander('パラメータ', expanded=st.session_state.form_expanded):
+        with st.form('form'):
+            c1, c2, c3 = st.columns([0.5, 2, 4])
+            c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
+            c2.selectbox(
+                '需要パターン',
+                (
+                    '少し使いすぎな2人世帯 (日中在宅0人)',
+                    '省エネ上手な3人家族 (日中在宅2人)',
+                    '2人世帯平均 (日中在宅2人)',
+                    '3人世帯 (日中在宅2人)',
+                    '5人世帯 (日中在宅3人）',
+                ),
+                key='demand_pattern',
+            )
+            c1.text_input('Amplify のアクセストークン', type='password',
+                key='token')
+            c3.text('ボタンを押すと最適化スタート')
+            with c3:
+                st.form_submit_button(label="スケジューリング！", on_click=solve)
 
 def cost_message(val):
     # コスト
@@ -219,6 +242,8 @@ st.session_state.pages = [
     EXPLANATION_PAGE,
     HEMSQ_PAGE,
 ]
+if 'form_expanded' not in st.session_state:
+    st.session_state.form_expanded = True
 if 'params' not in st.session_state:
     st.session_state.params = {
         'tenki': {
