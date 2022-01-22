@@ -55,40 +55,10 @@ def create_transition_button(obj):
                 on_click=page.func,
             )
 
-def create_form(obj):
-    with obj:
-        with st.form("form"):
-            tenki_name = st.selectbox(
-                "天気",
-                (
-                    "晴れ",
-                    "曇り",
-                    "雨",
-                ),
-                key='tenki_name',
-            )
-            demand_pattern = st.selectbox(
-                "需要パターン",
-                (
-                    "少し使いすぎな2人世帯 (日中在宅0人)",
-                    "省エネ上手な3人家族 (日中在宅2人)",
-                    "2人世帯平均 (日中在宅2人)",
-                    "3人世帯 (日中在宅2人)",
-                    "5人世帯 (日中在宅3人）",
-                ),
-                key='demand_pattern',
-            )
-            token = st.text_input('Amplify のアクセストークン', type='password',
-                key='token')
-            submitted = st.form_submit_button(
-                label="スケジューリング！",
-                on_click=solve,
-            )
-
-def create_form_v2():
+def create_form():
     with st.expander('パラメータ', expanded=st.session_state.form_expanded):
         with st.form('form'):
-            c1, c2, c3 = st.columns([0.5, 2, 4])
+            c1, c2, c3, c4 = st.columns([0.5, 2, 1, 4])
             c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
             c2.selectbox(
                 '需要パターン',
@@ -101,10 +71,10 @@ def create_form_v2():
                 ),
                 key='demand_pattern',
             )
-            c1.text_input('Amplify のアクセストークン', type='password',
+            c3.text_input('Amplify のアクセストークン', type='password',
                 key='token')
-            c3.text('ボタンを押すと最適化スタート')
-            with c3:
+            c4.text('ボタンを押すと最適化スタート')
+            with c4:
                 st.form_submit_button(label="スケジューリング！", on_click=solve)
 
 def cost_message(val):
@@ -143,6 +113,42 @@ def create_result(obj, hq):
     fig5, ax5 = hq.cost_and_use_graph()
     obj.pyplot(fig5)
 
+def create_result_v2(hq):
+    # column を分ける
+    col1, col2 = st.columns([1, 3])
+    # 天気
+    emoji = st.session_state.params['tenki_emoji'][st.session_state.tenki_name]
+    col1.metric(label='お天気', value=emoji)
+    # 需要パターン
+    col2.metric(label='需要パターン', value=st.session_state.demand_pattern)
+    # コストの表示
+    val = hq.cost_dict()
+    if val['cost'] >= 0:
+        col1.metric(label='コスト', value='{} 円'.format(val['cost']))
+    else:
+        col1.metric(label='売り上げ', value='{} 円'.format(val['cost']))
+    # CO2排出量（0.445kg/kWh)
+    col2.metric(label='CO2排出量', value='{} 円'.format(val['CO2']))
+
+    # スケジュール表の表示
+    st.write('スケジュール')
+    fig1, ax1 = hq.all_table_fig()
+    st.pyplot(fig1)
+
+    # column を分ける
+    col3, col4 = st.columns(2)
+    # 需要のグラフ
+    fig2, ax2 = hq.demand_graph()
+    col3.pyplot(fig2)
+    # 太陽光のグラフ
+    fig3, ax3 = hq.solar_graph()
+    col4.pyplot(fig3)
+    # コストと充電のグラフ
+    fig4, ax4 = hq.cost_and_charge_graph()
+    col3.pyplot(fig4)
+    # コストと使用のグラフ
+    fig5, ax5 = hq.cost_and_use_graph()
+    col4.pyplot(fig5)
 
 def common_first():
     # タイトル
@@ -155,12 +161,13 @@ def common_last():
 
 def simple_demo_page(hq=None):
     common_first()
-    create_form_v2()
-    params_col, result_col = st.columns([1, 4])
+    create_form()
+    # params_col, result_col = st.columns([1, 4])
     # create_form(params_col)
     # result_col.write("結果")
     if hq:
-        create_result(result_col, hq)
+        # create_result(result_col, hq)
+        create_result_v2(hq)
     common_last()
 
 def detailed_demo_page():
@@ -253,9 +260,12 @@ if 'params' not in st.session_state:
             '雨': ['r' for i in range(8)],
         },
         'tenki_emoji': {
-            '晴れ': ':sunny:',
-            '曇り': ':cloud:',
-            '雨': ':umbrella:',
+            # '晴れ': ':sunny:',
+            # '曇り': ':cloud:',
+            # '雨': ':umbrella:',
+            '晴れ': '☀️',
+            '曇り': '☁️',
+            '雨': '☂️',
         },
         'demand': {
             '少し使いすぎな2人世帯 (日中在宅0人)': [550,450,360,350,350,400,420,710,710,620,590,450,450,410,410,410,410,440,500,670,690,670,670,650],
