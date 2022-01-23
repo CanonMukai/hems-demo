@@ -2,7 +2,7 @@ import streamlit as st
 from amplify.client import FixstarsClient
 from hemsq import HemsQ
 
-from sub import my_round
+from sub import *
 
 ############################################
 # Streamlit 全体の設定
@@ -103,6 +103,11 @@ def create_result(hq):
     with st.expander('全スケジュール表'):
         fig1, ax1 = hq.all_table_fig()
         st.pyplot(fig1)
+
+    # plotly
+    df = hq.all_table_df()
+    fig = plotly_demand_graph(df)
+    st.plotly_chart(fig, use_container_width=True)
 
     # column を分ける
     col3, col4 = st.columns(2)
