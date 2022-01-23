@@ -105,9 +105,11 @@ def create_result(hq):
         st.pyplot(fig1)
 
     # plotly
-    df = hq.all_table_df()
-    fig = plotly_demand_graph(df)
-    st.plotly_chart(fig, use_container_width=True)
+    df = modified_df(hq.all_table_df())
+    plotly_fig1 = plotly_demand_graph(df)
+    st.plotly_chart(plotly_fig1, use_container_width=True)
+    plotly_fig2 = plotly_solar_graph(df)
+    st.plotly_chart(plotly_fig2, use_container_width=True)
 
     # column を分ける
     col3, col4 = st.columns(2)
