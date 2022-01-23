@@ -16,7 +16,7 @@ def plotly_demand_graph(df):
     df2 = df.T
     df2.columns = columns
     df['時間'] = df.index
-    df.index = pd.RangeIndex(start=0, stop=24, step=1)
+    # df.index = pd.RangeIndex(start=0, stop=24, step=1)
     fig = ms(rows=1, cols=1, specs=[[{'secondary_y': True}]])
     fig.add_bar(
         x=df2.index, y=df2['需要 (W)'], name='需要 (W)',
