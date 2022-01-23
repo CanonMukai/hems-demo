@@ -110,21 +110,8 @@ def create_result(hq):
     st.plotly_chart(plotly_fig1, use_container_width=True)
     plotly_fig2 = plotly_solar_graph(df)
     st.plotly_chart(plotly_fig2, use_container_width=True)
-
-    # column を分ける
-    col3, col4 = st.columns(2)
-    # 需要のグラフ
-    fig2, ax2 = hq.demand_graph()
-    col3.pyplot(fig2)
-    # 太陽光のグラフ
-    fig3, ax3 = hq.solar_graph()
-    col4.pyplot(fig3)
-    # コストと充電のグラフ
-    fig4, ax4 = hq.cost_and_charge_graph()
-    col3.pyplot(fig4)
-    # コストと使用のグラフ
-    fig5, ax5 = hq.cost_and_use_graph()
-    col4.pyplot(fig5)
+    plotly_fig3 = plotly_charge_graph(df)
+    st.plotly_chart(plotly_fig3, use_container_width=True)
 
 def common_first():
     # タイトル

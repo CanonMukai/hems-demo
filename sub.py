@@ -87,3 +87,38 @@ def plotly_solar_graph(df):
     fig.update_yaxes(title_text='太陽光売電価格 (円/W)', showgrid=False, secondary_y=True)
     fig.update_layout(title='太陽光の収支')
     return fig
+
+def plotly_charge_graph(df):
+    '''
+    input: modified_df
+    output: plotly fig
+    '''
+    fig = ms(rows=1, cols=1, specs=[[{'secondary_y': True}]])
+    fig.add_bar(
+        x=df.index, y=df['太陽光充電量 (W)'], name='太陽光充電量 (W)',
+        offsetgroup='left', marker=dict(color='lightgray'))
+    fig.add_bar(
+        x=df.index, y=df['商用電源充電量 (W)'], name='商用電源充電量 (W)',
+        offsetgroup='left', base=df['太陽光充電量 (W)'],
+        marker=dict(color='coral'))
+    fig.add_bar(
+        x=df.index, y=df['蓄電使用量 (W)'], name='蓄電使用量 (W)',
+        offsetgroup='mid', marker=dict(color='gold'))
+    fig.add_bar(
+        x=df.index, y=df['残りの蓄電量 (W)'], name='残りの蓄電量 (W)',
+        offsetgroup='right', marker=dict(color='brown'))
+    
+    trace0 = go.Scatter(
+        x=df.index, y=df['商用電源料金 (円/W)'], name='商用電源料金 (円/W)',
+        line=dict(color='green'))
+    fig.add_trace(trace0, secondary_y=True)
+    trace1 = go.Scatter(
+        x=df.index, y=df['太陽光売電価格 (円/W)'], name='太陽光売電価格 (円/W)',
+        line=dict(color='orange'))
+    fig.add_trace(trace1, secondary_y=True)
+
+    fig.update_xaxes(title_text='時間', showgrid=False)
+    fig.update_yaxes(title_text='電力量 (W)', showgrid=False)
+    fig.update_yaxes(title_text='太陽光売電価格 (円/W)', showgrid=False, secondary_y=True)
+    fig.update_layout(title='蓄電池関連')
+    return fig
