@@ -1,5 +1,4 @@
 import streamlit as st
-from amplify.client import FixstarsClient
 from hemsq import HemsQ
 
 from sub import *
@@ -23,7 +22,6 @@ st.set_page_config(
 def solve():
     tenki_name = st.session_state['tenki_name']
     demand_pattern = st.session_state['demand_pattern']
-    token = st.session_state['token']
     emoji = st.session_state.params['tenki_emoji'][tenki_name]
     with st.spinner('計算中です...{}'.format(emoji)):
         hq = HemsQ()
@@ -31,14 +29,9 @@ def solve():
         demand = st.session_state.params['demand'][demand_pattern]
         tenki = st.session_state.params['tenki'][tenki_name]
         hq.set_params(weather_list=tenki, demand_list=demand)
+        hq.set_params(unit=250, step=8, reschedule_span=8)
         # クライアントの設定
-        client = FixstarsClient()
-        client.token = token
-        client.parameters.timeout = 1000 # タイムアウト1秒
-        client.parameters.outputs.num_outputs = 0
-        client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
-        hq.set_client(client)
-        hq.solve()
+        hq.solve('SA')
     st.session_state.form_expanded = False
     simple_demo_page(hq=hq)
 
@@ -60,7 +53,7 @@ def create_transition_button(obj):
 def create_form():
     with st.expander('パラメータ', expanded=st.session_state.form_expanded):
         with st.form('form'):
-            c1, c2, c3, c4 = st.columns([0.5, 2, 1, 2])
+            c1, c2, c3 = st.columns([0.5, 2, 3])
             c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
             c2.selectbox(
                 '需要パターン',
@@ -73,10 +66,8 @@ def create_form():
                 ),
                 key='demand_pattern',
             )
-            c3.text_input('Amplify のアクセストークン', type='password',
-                key='token')
-            c4.text('ボタンを押すと最適化スタート')
-            with c4:
+            c3.text('ボタンを押すと最適化スタート')
+            with c3:
                 st.form_submit_button(label="スケジューリング！", on_click=solve)
 
 def create_result(hq):
