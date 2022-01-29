@@ -130,15 +130,20 @@ def plotly_bat_compare(df1, df2):
     '''
     fig = ms(rows=1, cols=1, specs=[[{'secondary_y': True}]])
     fig.add_bar(
-        x=df1.index, y=df1['需要 (W)'], name='需要 (W)',
-        offsetgroup='left', marker=dict(color='gray'))
+        x=df1.index, y=df1['残りの蓄電量 (W)'], name='残りの蓄電量 (初期蓄電量 4500W)',
+        offsetgroup='left', marker=dict(color='firebrick'))
     fig.add_bar(
-        x=df1.index, y=df1['残りの蓄電量 (W)'], name='残りの蓄電量 (W)',
-        offsetgroup='mid', marker=dict(color='deepskyblue'))
+        x=df1.index, y=df1['蓄電使用量 (W)'], name='蓄電使用量 (初期蓄電量 4500W)',
+        offsetgroup='left', base=df1['残りの蓄電量 (W)'],
+        marker=dict(color='lightcoral'))
     fig.add_bar(
-        x=df2.index, y=df2['残りの蓄電量 (W)'], name='残りの蓄電量 (W)',
-        offsetgroup='right', marker=dict(color='limegreen'))
-
+        x=df2.index, y=df2['残りの蓄電量 (W)'], name='残りの蓄電量 (初期蓄電量 0W)',
+        offsetgroup='right', marker=dict(color='darkblue'))
+    fig.add_bar(
+        x=df2.index, y=df2['蓄電使用量 (W)'], name='蓄電使用量 (初期蓄電量 0W)',
+        offsetgroup='right', base=df2['残りの蓄電量 (W)'],
+        marker=dict(color='dodgerblue'))
+    
     fig.update_xaxes(title_text='時間', showgrid=False)
     fig.update_yaxes(title_text='電力量 (W)', showgrid=False)
     fig.update_layout(title='初期蓄電池残量による蓄電池残量の違い')
@@ -192,4 +197,57 @@ def plotly_demand_compare(df1, df2):
     fig.update_yaxes(title_text='電力量 (W)', showgrid=False)
     fig.update_yaxes(title_text='商用電源価格 (円/W)', showgrid=False, secondary_y=True)
     fig.update_layout(title='初期蓄電量による供給の違い')
+    fig.update_layout(showlegend=False)
     return fig
+
+def plotly_demand_compare_v2(df1, df2):
+    '''
+    input: modified_df1, modified_df2
+    output: plotly fig
+    '''
+    fig = ms(rows=1, cols=1, specs=[[{'secondary_y': True}]])
+    # 需要
+    fig.add_bar(
+        x=df1.index, y=df1['需要 (W)'], name='需要 (W)',
+        offsetgroup='left', marker=dict(color='gray'))
+    # df1
+    fig.add_bar(
+        x=df1.index, y=df1['太陽光使用量 (W)'], name='太陽光使用量 (初期蓄電量 4500W)',
+        offsetgroup='mid', marker=dict(color='firebrick'))
+    fig.add_bar(
+        x=df1.index, y=df1['蓄電使用量 (W)'], name='蓄電使用量 (初期蓄電量 4500W)',
+        offsetgroup='mid', base=df1['太陽光使用量 (W)'],
+        marker=dict(color='lightcoral'))
+    fig.add_bar(
+        x=df1.index, y=df1['商用電源使用量 (W)'], name='商用電源使用量 (初期蓄電量 4500W)',
+        offsetgroup='mid', base=df1['太陽光使用量 (W)'] + df1['蓄電使用量 (W)'],
+        marker=dict(color='mistyrose'))
+    # df2
+    fig.add_bar(
+        x=df2.index, y=df2['太陽光使用量 (W)'], name='太陽光使用量 (初期蓄電量 0W)',
+        offsetgroup='right', marker=dict(color='darkblue'))
+    fig.add_bar(
+        x=df2.index, y=df2['蓄電使用量 (W)'], name='蓄電使用量 (初期蓄電量 0W)',
+        offsetgroup='right', base=df2['太陽光使用量 (W)'],
+        marker=dict(color='dodgerblue'))
+    fig.add_bar(
+        x=df2.index, y=df2['商用電源使用量 (W)'], name='商用電源使用量 (初ß期蓄電量 0W)',
+        offsetgroup='right', base=df2['太陽光使用量 (W)'] + df2['蓄電使用量 (W)'],
+        marker=dict(color='skyblue'))
+    
+    trace0 = go.Scatter(
+        x=df1.index, y=df1['商用電源料金 (円/W)'], name='商用電源料金 (円/W)',
+        line=dict(color='green'))
+    fig.add_trace(trace0, secondary_y=True)
+    trace1 = go.Scatter(
+        x=df1.index, y=df1['太陽光売電価格 (円/W)'], name='太陽光売電価格 (円/W)',
+        line=dict(color='orange'))
+    fig.add_trace(trace1, secondary_y=True)
+
+    fig.update_xaxes(title_text='時間', showgrid=False)
+    fig.update_yaxes(title_text='電力量 (W)', showgrid=False)
+    fig.update_yaxes(title_text='商用電源価格 (円/W)', showgrid=False, secondary_y=True)
+    fig.update_layout(title='初期蓄電量による供給の違い')
+    fig.update_layout(showlegend=False)
+    return fig
+
