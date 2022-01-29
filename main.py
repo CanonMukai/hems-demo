@@ -125,6 +125,8 @@ def simple_demo_page(hq=None):
 
 def demo_example_page():
     common_first()
+    plotly_fig_demand = plotly_demand_compare(result_bat4500['df'], result_bat0['df'])
+    st.plotly_chart(plotly_fig_demand, use_container_width=True)
     plotly_fig_bat = plotly_bat_compare(result_bat4500['df'], result_bat0['df'])
     st.plotly_chart(plotly_fig_bat, use_container_width=True)
     common_last()
