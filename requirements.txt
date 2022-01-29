@@ -6,4 +6,5 @@ dwave-neal==0.5.7
 matplotlib==3.2.2
 dwave-ocean-sdk==3.4.1
 plotly==5.5.0
+Pillow==7.2.0
 -e git://github.com/CanonMukai/hemsq-prototype.git@neal#egg=hemsq
