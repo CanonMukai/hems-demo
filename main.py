@@ -125,12 +125,40 @@ def simple_demo_page(hq=None):
 
 def demo_example_page():
     common_first()
+    st.markdown('''
+### 初期蓄電量による違い
+初期蓄電量とは、最初に蓄電池に残っている電力量のことです。
+
+今回は 4500 (W) のときと 0 (W) のときの結果を比較しています。
+
+まずは、需要に対して、商用電源、太陽光、蓄電池の電力のそれぞれの使用量をグラフにしました。
+
+- グレーの棒：需要
+- 濃い色の棒：初期蓄電量 4500 (W)
+- 薄い色の棒：初期蓄電量 0 (W)
+
+- オレンジ系：太陽光使用量
+- ブルー系：蓄電使用量
+- グリーン系：商用電源使用量
+''')
     plotly_fig_demand = plotly_demand_compare(result_bat4500['df'], result_bat0['df'])
     st.plotly_chart(plotly_fig_demand, use_container_width=True)
-    plotly_fig_demand_v2 = plotly_demand_compare_v2(result_bat4500['df'], result_bat0['df'])
-    st.plotly_chart(plotly_fig_demand_v2, use_container_width=True)
+
+    st.markdown('''
+次に、蓄電使用量と残量のグラフです。
+
+- レッド系の棒：初期蓄電量 4500 (W)
+- ブルー系の棒：初期蓄電量 0 (W)
+
+- 濃い色：残量
+- 薄い色：使用量
+''')
     plotly_fig_bat = plotly_bat_compare(result_bat4500['df'], result_bat0['df'])
     st.plotly_chart(plotly_fig_bat, use_container_width=True)
+
+    st.markdown('''
+### 天気による違い
+''')
     common_last()
 
 def explanation_page():
