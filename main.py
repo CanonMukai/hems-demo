@@ -2,6 +2,7 @@ import streamlit as st
 from hemsq import HemsQ
 
 from sub import *
+from sample_result import *
 
 ############################################
 # Streamlit 全体の設定
@@ -86,7 +87,7 @@ def create_result(hq):
     if cost >= 0:
         col1.metric(label='コスト', value='{} 円'.format(cost))
     else:
-        col1.metric(label='売り上げ', value='{} 円'.format(cost))
+        col1.metric(label='売り上げ', value='{} 円'.format(-cost))
     # CO2排出量（0.445kg/kWh)
     col2.metric(label='CO2排出量', value='{} kg'.format(val['CO2']))
 
@@ -122,11 +123,10 @@ def simple_demo_page(hq=None):
         create_result(hq)
     common_last()
 
-def detailed_demo_page():
+def demo_example_page():
     common_first()
-    col1, col2 = st.columns([2, 5])
-    create_form(col1)
-    col2.write("ここに結果を書くよ")
+    plotly_fig_bat = plotly_bat_compare(result_bat4500['df'], result_bat0['df'])
+    st.plotly_chart(plotly_fig_bat, use_container_width=True)
     common_last()
 
 def explanation_page():
@@ -184,7 +184,7 @@ class Page:
         return self._func
 
 SIMPLE_DEMO_PAGE = Page("簡易デモページ", simple_demo_page)
-DETAILED_DEMO_PAGE = Page("詳細デモページ", detailed_demo_page)
+DEMO_EXAMPLE_PAGE = Page("デモの例", demo_example_page)
 EXPLANATION_PAGE = Page("説明ページ", explanation_page)
 HEMSQ_PAGE = Page("HemsQ詳細ページ", hemsq_page)
 
@@ -198,7 +198,7 @@ if "init" not in st.session_state:
     st.session_state.init = True
 st.session_state.pages = [
     SIMPLE_DEMO_PAGE,
-    # DETAILED_DEMO_PAGE,
+    DEMO_EXAMPLE_PAGE,
     EXPLANATION_PAGE,
     HEMSQ_PAGE,
 ]

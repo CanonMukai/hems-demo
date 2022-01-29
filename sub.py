@@ -122,3 +122,24 @@ def plotly_charge_graph(df):
     fig.update_yaxes(title_text='太陽光売電価格 (円/W)', showgrid=False, secondary_y=True)
     fig.update_layout(title='蓄電池関連')
     return fig
+
+def plotly_bat_compare(df1, df2):
+    '''
+    input: modified_df1, modified_df2
+    output: plotly fig
+    '''
+    fig = ms(rows=1, cols=1, specs=[[{'secondary_y': True}]])
+    fig.add_bar(
+        x=df1.index, y=df1['需要 (W)'], name='需要 (W)',
+        offsetgroup='left', marker=dict(color='gray'))
+    fig.add_bar(
+        x=df1.index, y=df1['残りの蓄電量 (W)'], name='残りの蓄電量 (W)',
+        offsetgroup='mid', marker=dict(color='deepskyblue'))
+    fig.add_bar(
+        x=df2.index, y=df2['残りの蓄電量 (W)'], name='残りの蓄電量 (W)',
+        offsetgroup='right', marker=dict(color='limegreen'))
+
+    fig.update_xaxes(title_text='時間', showgrid=False)
+    fig.update_yaxes(title_text='電力量 (W)', showgrid=False)
+    fig.update_layout(title='初期蓄電池残量による違い')
+    return fig
