@@ -1,5 +1,4 @@
 import streamlit as st
-from PIL import Image
 from hemsq import HemsQ
 
 from sub import *
@@ -134,8 +133,7 @@ def demo_example_page():
 
 まずは、需要に対して、商用電源、太陽光、蓄電池の電力のそれぞれの使用量をグラフにしました。
 ''')
-    legend_demand = Image.open('imgs/legend_demand.png')
-    st.image(legend_demand)
+    st.image('imgs/legend_demand.png', width=5)
     plotly_fig_demand = plotly_demand_compare(result_bat4500['df'], result_bat0['df'])
     st.plotly_chart(plotly_fig_demand, use_container_width=True)
 
