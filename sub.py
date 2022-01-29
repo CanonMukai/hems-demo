@@ -152,7 +152,7 @@ def plotly_demand_compare(df1, df2):
     fig = ms(rows=1, cols=1, specs=[[{'secondary_y': True}]])
     # 需要
     fig.add_bar(
-        x=df.index, y=df['需要 (W)'], name='需要 (W)',
+        x=df1.index, y=df1['需要 (W)'], name='需要 (W)',
         offsetgroup='left', marker=dict(color='gray'))
     # df1
     fig.add_bar(
