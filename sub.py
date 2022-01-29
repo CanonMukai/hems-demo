@@ -207,9 +207,9 @@ def plotly_demand_compare_v2(df1, df2):
     '''
     fig = ms(rows=1, cols=1, specs=[[{'secondary_y': True}]])
     # 需要
-    fig.add_bar(
-        x=df1.index, y=df1['需要 (W)'], name='需要 (W)',
-        offsetgroup='left', marker=dict(color='gray'))
+    # fig.add_bar(
+    #     x=df1.index, y=df1['需要 (W)'], name='需要 (W)',
+    #     offsetgroup='left', marker=dict(color='gray'))
     # df1
     fig.add_bar(
         x=df1.index, y=df1['太陽光使用量 (W)'], name='太陽光使用量 (初期蓄電量 4500W)',
@@ -221,7 +221,7 @@ def plotly_demand_compare_v2(df1, df2):
     fig.add_bar(
         x=df1.index, y=df1['商用電源使用量 (W)'], name='商用電源使用量 (初期蓄電量 4500W)',
         offsetgroup='mid', base=df1['太陽光使用量 (W)'] + df1['蓄電使用量 (W)'],
-        marker=dict(color='mistyrose'))
+        marker=dict(color='darkorange'))
     # df2
     fig.add_bar(
         x=df2.index, y=df2['太陽光使用量 (W)'], name='太陽光使用量 (初期蓄電量 0W)',
@@ -233,7 +233,7 @@ def plotly_demand_compare_v2(df1, df2):
     fig.add_bar(
         x=df2.index, y=df2['商用電源使用量 (W)'], name='商用電源使用量 (初ß期蓄電量 0W)',
         offsetgroup='right', base=df2['太陽光使用量 (W)'] + df2['蓄電使用量 (W)'],
-        marker=dict(color='skyblue'))
+        marker=dict(color='aqua'))
     
     trace0 = go.Scatter(
         x=df1.index, y=df1['商用電源料金 (円/W)'], name='商用電源料金 (円/W)',
