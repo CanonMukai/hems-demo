@@ -190,6 +190,9 @@ from amplify.client import XXXClient
 client = XXXClient()
 hq.set_client(client)
     """, language="python")
+    st.markdown('<a href="https://colab.research.google.com/drive/18BPHExIrYWZrwwYUFU4KvRjNbFCvrDi3?usp=sharing" '
+        'target="_blank" rel="noopener noreferrer">Opne in Colab</a>',
+        unsafe_allow_html=True)
     common_last()
 
 ############################################
