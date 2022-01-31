@@ -1,4 +1,4 @@
-article_text = '''
+article_text = r'''
 # エネルギー利用最適化
 
 ## 概要

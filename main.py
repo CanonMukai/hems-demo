@@ -157,16 +157,8 @@ def demo_example_page():
 
 def explanation_page():
     common_first()
-    st.markdown("""
-このページでは家庭におけるエネルギー利用のスケジューリングを
-アニーリングマシンで行う手法について解説します。
-
-ハミルトニアン$H$は以下のようになります。
-""")
-    st.latex("H = \sum_{i, j}JS_iS_j")
-    st.write("※このプロジェクトは未踏ターゲット事務局によりサポートして頂いています。")
-
     st.markdown(article_text, unsafe_allow_html=True)
+    st.write(article_text)
 
     common_last()
 
