@@ -3,6 +3,7 @@ from hemsq import HemsQ
 
 from sub import *
 from sample_result import *
+from article import article_text
 
 ############################################
 # Streamlit 全体の設定
@@ -164,6 +165,9 @@ def explanation_page():
 """)
     st.latex("H = \sum_{i, j}JS_iS_j")
     st.write("※このプロジェクトは未踏ターゲット事務局によりサポートして頂いています。")
+
+    st.markdown(article_text, unsafe_allow_html=True)
+
     common_last()
 
 def hemsq_page():
