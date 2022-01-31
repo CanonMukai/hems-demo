@@ -345,13 +345,15 @@ type_and_text = [
 ''',
     },
     {
-        'type': 'latex',
+        'type': 'markdown',
         'body': r'''
+$$
 x_{i,t} =
     \begin{cases}
         1 \quad \mbox{項目$i$を時間枠$t$に割り当てるとき}\\
         0 \quad \mbox{割り当てないとき}\\
     \end{cases}
+$$
 ''',
     },
     {
@@ -391,3 +393,5 @@ def convert(type_and_text):
             st.image(t['body'], caption=t['caption'], width=t['width'])
         elif t['type'] == 'latex':
             st.latex(t['body'])
+        elif t['type'] == 'markdown':
+            st.markdown(t['body'])
