@@ -346,7 +346,7 @@ type_and_text = [
     },
     {
         'type': 'markdown',
-        'body': r'''
+        'body': '''
 $$
 x_{i,t} =
     \begin{cases}
