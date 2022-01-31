@@ -264,7 +264,7 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/model.pdf',
+        'body': 'imgs/model.png',
         'caption': None,
         'width': None,
     },
@@ -302,7 +302,7 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/入力と出力.pdf',
+        'body': 'imgs/入力と出力.png',
         'caption': None,
         'width': None,
     },
@@ -322,7 +322,7 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/項目とは.pdf',
+        'body': 'imgs/項目とは.png',
         'caption': None,
         'width': None,
     },
@@ -334,7 +334,7 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/項目割り当て.pdf',
+        'body': 'imgs/項目割り当て.png',
         'caption': None,
         'width': None,
     },
