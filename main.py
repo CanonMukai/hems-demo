@@ -3,7 +3,7 @@ from hemsq import HemsQ
 
 from sub import *
 from sample_result import *
-from article import article_text, convert, type_and_text
+from article import convert, type_and_text
 
 ############################################
 # Streamlit 全体の設定
@@ -158,7 +158,6 @@ def demo_example_page():
 def explanation_page():
     common_first()
     convert(type_and_text)
-    st.write(article_text)
     common_last()
 
 def hemsq_page():
