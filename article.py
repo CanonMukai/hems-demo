@@ -345,14 +345,12 @@ type_and_text = [
 ''',
     },
     {
-        'type': 'markdown',
-        'body': '''
-x_{i,t} =
-    \begin{cases}
-        1 \quad \mbox{項目$i$を時間枠$t$に割り当てるとき}\\
-        0 \quad \mbox{割り当てないとき}\\
-    \end{cases}
-''',
+        'type': 'latex',
+        'body': r'''
+x = \begin{cases}
+   1 &\text{項目 $i$ を時間枠 $t$ に割り当てるとき}\\
+   0 &\text{割り当てないとき}
+\end{cases}''',
     },
     {
         'type': 'text',
