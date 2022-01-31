@@ -157,9 +157,7 @@ def demo_example_page():
 
 def explanation_page():
     common_first()
-    st.markdown(article_text, unsafe_allow_html=True)
     st.write(article_text)
-
     common_last()
 
 def hemsq_page():
