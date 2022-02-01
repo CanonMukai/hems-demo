@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 type_and_text = [
     {
@@ -18,7 +19,7 @@ type_and_text = [
         'width': 300,
     },
     {
-        'type': 'markdown',
+        'type': 'html',
         'body': '''
 <img src="img/hems.png" width='300'>
 <br />
@@ -322,3 +323,5 @@ def convert(type_and_text):
             st.latex(t['body'])
         elif t['type'] == 'markdown':
             st.markdown(t['body'], unsafe_allow_html=True)
+        elif t['type'] == 'html':
+            components.html(t['body'])
