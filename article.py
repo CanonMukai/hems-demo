@@ -21,7 +21,7 @@ type_and_text = [
     {
         'type': 'html',
         'body': '''
-<img src="img/hems.png" width='300'>
+<img src="imgs/hems.png" width='300'>
 <br />
 <center>出典 iエネ コンソーシアム「HEMSとは？」</center>
 ''',
