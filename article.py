@@ -103,7 +103,7 @@ type_and_text = [
         'type': 'image',
         'body': 'https://drive.google.com/uc?export=view&id=1UmiR9us6WcHTEFfpUFpcmaCEQm_zUXyW&usp=sharing',
         'caption': None,
-        'width': 400,
+        'width': 450,
     },
     {
         'type': 'text',
@@ -321,4 +321,4 @@ def convert(type_and_text):
         elif t['type'] == 'markdown':
             st.markdown(t['body'], unsafe_allow_html=True)
 
-convert(type_and_text)
+# convert(type_and_text)
