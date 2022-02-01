@@ -29,9 +29,11 @@ type_and_text = [
     {
         'type': 'markdown',
         'body': '''
-<img src="https://static.streamlit.io/examples/dog.jpg" width='300'>
-<br />
-<center>出典 iエネ コンソーシアム「HEMSとは？」</center>
+<figure>
+    <img src="https://drive.google.com/file/d/1qOPQvru_tcXQ3myIAZQ7its_igPGlVSW/view?usp=sharing"
+        width='300' align='center'>
+    <figcaption>出典 iエネ コンソーシアム「HEMSとは？」</figcaption>
+</figure>
 ''',
     },
     {
