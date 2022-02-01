@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 
 type_and_text = [
     {
@@ -13,35 +12,15 @@ type_and_text = [
 ''',
     },
     {
-        'type': 'image',
-        'body': 'imgs/hems.png',
-        'caption': '出典 iエネ コンソーシアム「HEMSとは？」',
-        'width': 300,
-    },
-    {
-        'type': 'html',
-        'body': '''
-<img src="https://static.streamlit.io/examples/dog.jpg" width='300'>
-<br />
-<center>出典 iエネ コンソーシアム「HEMSとは？」</center>
-''',
-    },
-    {
         'type': 'markdown',
         'body': '''
-<figure>
-    <img src="https://drive.google.com/file/d/1qOPQvru_tcXQ3myIAZQ7its_igPGlVSW/view?usp=sharing"
-        width='300' align='center'>
-    <figcaption>出典 iエネ コンソーシアム「HEMSとは？」</figcaption>
-</figure>
-''',
-    },
-    {
-        'type': 'markdown',
-        'body': '''
-<img src="imgs/hems.png" width='300'>
-<br />
-<center>出典 iエネ コンソーシアム「HEMSとは？」</center>
+<div style="text-align: center">
+    <figure>
+        <img src="https://drive.google.com/uc?export=view&id=1qOPQvru_tcXQ3myIAZQ7its_igPGlVSW&usp=sharing"
+            width='300'>
+        <figcaption>出典 iエネ コンソーシアム「HEMSとは？」</figcaption>
+    </figure>
+</div>
 ''',
     },
     {
@@ -64,9 +43,9 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/model.png',
+        'body': 'https://drive.google.com/uc?export=view&id=1-6ckB3YvEBIcfIwHuKf0b0mO4dtUZpoe&usp=sharing',
         'caption': None,
-        'width': 250,
+        'width': 300,
     },
     {
         'type': 'text',
@@ -86,9 +65,9 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/output.png',
+        'body': 'https://drive.google.com/uc?export=view&id=1SuaTk4Za_SBjvJoTB01O2AsPaMR95RWu&usp=sharing',
         'caption': None,
-        'width': 400,
+        'width': 550,
     },
     {
         'type': 'text',
@@ -102,9 +81,9 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/入力と出力.png',
+        'body': 'https://drive.google.com/uc?export=view&id=187OpYfcneDDMU5PYAOmeY8V2gTdcH8RO&usp=sharing',
         'caption': None,
-        'width': 800,
+        'width': 900,
     },
     {
         'type': 'text',
@@ -122,7 +101,7 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/項目とは.png',
+        'body': 'https://drive.google.com/uc?export=view&id=1UmiR9us6WcHTEFfpUFpcmaCEQm_zUXyW&usp=sharing',
         'caption': None,
         'width': 400,
     },
@@ -134,9 +113,9 @@ type_and_text = [
     },
     {
         'type': 'image',
-        'body': 'imgs/項目割り当て.png',
+        'body': 'https://drive.google.com/uc?export=view&id=1ItK9vtsgIVc-KFZWmZs2ss3u8RnbBGv9&usp=sharing',
         'caption': None,
-        'width': 400,
+        'width': 550,
     },
     {
         'type': 'text',
@@ -241,9 +220,9 @@ $\textrm{In}$ は集合 $\{$太陽光充電 $1$ ,..., 太陽光充電 $n_{2}$, �
     },
     {
         'type': 'image',
-        'body': 'imgs/H_demand.png',
+        'body': 'https://drive.google.com/uc?export=view&id=1EcHxiU4FqUlQiD6evWPwXvc94zJSGpbw&usp=sharing',
         'caption': None,
-        'width': 250,
+        'width': 300,
     },
     {
         'type': 'latex',
@@ -264,9 +243,9 @@ $D$ は需要量、$\textrm{Use}$ は集合 $\{$太陽光使用 $1$ ,..., 太陽
     },
     {
         'type': 'image',
-        'body': 'imgs/H_sun.png',
+        'body': 'https://drive.google.com/uc?export=view&id=15kIF6UVHBH2Lr80xLq-7YZbvuwc1kbt6&usp=sharing',
         'caption': None,
-        'width': 250,
+        'width': 300,
     },
     {
         'type': 'latex',
@@ -341,5 +320,3 @@ def convert(type_and_text):
             st.latex(t['body'])
         elif t['type'] == 'markdown':
             st.markdown(t['body'], unsafe_allow_html=True)
-        elif t['type'] == 'html':
-            components.html(t['body'])
