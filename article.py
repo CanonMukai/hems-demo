@@ -21,6 +21,22 @@ type_and_text = [
     {
         'type': 'html',
         'body': '''
+<img src="https://static.streamlit.io/examples/dog.jpg" width='300'>
+<br />
+<center>出典 iエネ コンソーシアム「HEMSとは？」</center>
+''',
+    },
+    {
+        'type': 'markdown',
+        'body': '''
+<img src="https://static.streamlit.io/examples/dog.jpg" width='300'>
+<br />
+<center>出典 iエネ コンソーシアム「HEMSとは？」</center>
+''',
+    },
+    {
+        'type': 'markdown',
+        'body': '''
 <img src="imgs/hems.png" width='300'>
 <br />
 <center>出典 iエネ コンソーシアム「HEMSとは？」</center>
