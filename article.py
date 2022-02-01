@@ -18,6 +18,14 @@ type_and_text = [
         'width': 300,
     },
     {
+        'type': 'markdown',
+        'body': '''
+<img src="img/hems.png" width='300'>
+<br />
+<center>出典 iエネ コンソーシアム「HEMSとは？」</center>
+''',
+    },
+    {
         'type': 'text',
         'body': r'''
 ここでは HEMS によって制御を行うことを仮定して、発電・蓄電・電力購入を最適に行うスケジュールをアニーリングマシンで作成し、住宅のエネルギー利用を最適化することを考えます。  
@@ -313,4 +321,4 @@ def convert(type_and_text):
         elif t['type'] == 'latex':
             st.latex(t['body'])
         elif t['type'] == 'markdown':
-            st.markdown(t['body'])
+            st.markdown(t['body'], unsafe_allow_html=True)
