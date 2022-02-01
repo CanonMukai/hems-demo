@@ -108,7 +108,7 @@ def create_result(hq):
 
 def common_first():
     # タイトル
-    st.title("HEMS エネルギー最適化")
+    st.title("HEMS エネルギー利用最適化")
     # ページ遷移ボタン
     create_transition_button(st.sidebar)
 
