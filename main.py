@@ -47,7 +47,7 @@ def create_transition_button(obj):
     with obj:
         for page in st.session_state.pages:
             button = st.button(
-                "{}へ".format(page.name),
+                "{}".format(page.name),
                 key="button{}".format(page.name),
                 on_click=page.func,
             )
@@ -134,18 +134,12 @@ def demo_example_page():
 
 まずは、需要に対して、商用電源、太陽光、蓄電池の電力のそれぞれの使用量をグラフにしました。
 ''')
-    st.image('imgs/legend_demand.png', width=300)
+    st.image('https://drive.google.com/uc?export=view&id=1MxkWWsZixF4q0JxVCdBIXbH2P2AsnvRM&usp=sharing', width=300)
     plotly_fig_demand = plotly_demand_compare(result_bat4500['df'], result_bat0['df'])
     st.plotly_chart(plotly_fig_demand, use_container_width=True)
 
     st.markdown('''
 次に、蓄電使用量と残量のグラフです。
-
-- レッド系の棒：初期蓄電量 4500 (W)
-- ブルー系の棒：初期蓄電量 0 (W)
-
-- 濃い色：残量
-- 薄い色：使用量
 ''')
     plotly_fig_bat = plotly_bat_compare(result_bat4500['df'], result_bat0['df'])
     st.plotly_chart(plotly_fig_bat, use_container_width=True)
@@ -208,10 +202,10 @@ class Page:
     def func(self):
         return self._func
 
-SIMPLE_DEMO_PAGE = Page("簡易デモページ", simple_demo_page)
-DEMO_EXAMPLE_PAGE = Page("デモの例", demo_example_page)
-EXPLANATION_PAGE = Page("説明ページ", explanation_page)
-HEMSQ_PAGE = Page("HemsQ詳細ページ", hemsq_page)
+SIMPLE_DEMO_PAGE = Page("デモ", simple_demo_page)
+DEMO_EXAMPLE_PAGE = Page("実行例", demo_example_page)
+EXPLANATION_PAGE = Page("アニーリングマシンでの解き方", explanation_page)
+HEMSQ_PAGE = Page("HemsQの詳細", hemsq_page)
 
 
 ############################################
