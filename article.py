@@ -19,7 +19,7 @@ type_and_text = [
 <div style="text-align: center">
     <figure>
         <img src="https://drive.google.com/uc?export=view&id=1qOPQvru_tcXQ3myIAZQ7its_igPGlVSW&usp=sharing"
-            width='300'>
+            width='400'>
         <figcaption>出典 iエネ コンソーシアム「HEMSとは？」</figcaption>
     </figure>
 </div>
@@ -125,7 +125,7 @@ type_and_text = [
         'type': 'image',
         'body': 'https://drive.google.com/uc?export=view&id=1ItK9vtsgIVc-KFZWmZs2ss3u8RnbBGv9&usp=sharing',
         'caption': None,
-        'width': 700,
+        'width': 600,
     },
     {
         'type': 'text',
