@@ -76,7 +76,8 @@ type_and_text = [
     {
         'type': 'text',
         'body': r'''
-スケジュールを作成するには、需要・天気予報・電気代などのデータが必要となります。したがって以下の流れでスケジューリングを行います。<br>
+スケジュールを作成するには、需要・天気予報・電気代などのデータが必要となります。したがって以下の流れでスケジューリングを行います。
+
 1. 入力データを受け取る
 2. アニーリングマシンで最適化を行う
 3. 結果を出力する
@@ -86,7 +87,7 @@ type_and_text = [
         'type': 'image',
         'body': 'https://drive.google.com/uc?export=view&id=187OpYfcneDDMU5PYAOmeY8V2gTdcH8RO&usp=sharing',
         'caption': None,
-        'width': 800,
+        'width': 700,
     },
     {
         'type': 'blank',
@@ -124,7 +125,7 @@ type_and_text = [
         'type': 'image',
         'body': 'https://drive.google.com/uc?export=view&id=1ItK9vtsgIVc-KFZWmZs2ss3u8RnbBGv9&usp=sharing',
         'caption': None,
-        'width': 550,
+        'width': 700,
     },
     {
         'type': 'text',
@@ -271,7 +272,7 @@ H_\mathrm{demand}=\sum_{t=1}^{T}\left[\sum_{i\in\mathrm{Use}}x_{i,t}-D(t)\right]
         'body': r'''
 ##### 4. 太陽光の収支が合うための制約
 
-太陽光で発電された電力は無駄にならないよう、必ず使用か充電か売電がなされるとします。そのため、各時間枠で太陽光発電量と太陽光使用・充電・売電量の和が等しくなるように（収支が合うように）制約を与えます。入力として受け取った天気予報データから太陽光発電量を算出し、項目あたりの電力量で割った $S$（単位はW）を用意し、この $S$ の値と合うように「太陽光」の項目を割り当てます。太陽光の項目集合 $\textrm{Sun}$ は集合 $\{$太陽光使用 $1$ , $\dots$ , 太陽光使用 $n_{1}$, 太陽光充電 $1$ ,..., 太陽光充電 $n_{2}$, 太陽光売電 $1$ , $\dots$ , 太陽光売電 $n_{3}\}$です。太陽光の収支が合わないとき、項の値は大きくなります。
+太陽光で発電された電力は無駄にならないよう、必ず使用か充電か売電がなされるとします。そのため、各時間枠で太陽光発電量と太陽光使用・充電・売電量の和が等しくなるように（収支が合うように）制約を与えます。
 ''',
     },
     {
@@ -279,6 +280,12 @@ H_\mathrm{demand}=\sum_{t=1}^{T}\left[\sum_{i\in\mathrm{Use}}x_{i,t}-D(t)\right]
         'body': 'https://drive.google.com/uc?export=view&id=15kIF6UVHBH2Lr80xLq-7YZbvuwc1kbt6&usp=sharing',
         'caption': None,
         'width': 300,
+    },
+    {
+        'type': 'text',
+        'body': r'''
+入力として受け取った天気予報データから太陽光発電量を算出し、項目あたりの電力量で割った $S$（単位はW）を用意し、この $S$ の値と合うように「太陽光」の項目を割り当てます。太陽光の項目集合 $\textrm{Sun}$ は集合 $\{$太陽光使用 $1$ , $\dots$ , 太陽光使用 $n_{1}$, 太陽光充電 $1$ ,..., 太陽光充電 $n_{2}$, 太陽光売電 $1$ , $\dots$ , 太陽光売電 $n_{3}\}$です。太陽光の収支が合わないとき、項の値は大きくなります。
+''',
     },
     {
         'type': 'latex',
