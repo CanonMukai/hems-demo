@@ -35,11 +35,11 @@ def solve():
         hq.set_params(unit=200, step=8, reschedule_span=8)
         # クライアントの設定
         successful = False
-        for _ in range(1):
+        for _ in range(10):
             result = hq.solve('SA')
-            st.write(result)
             if result:
                 successful = True
+                break
     st.session_state.form_expanded = False
     simple_demo_page(hq=hq, successful=successful)
 
