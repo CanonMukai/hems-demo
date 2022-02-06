@@ -31,7 +31,9 @@ def solve():
         # パラメータの設定
         demand = st.session_state.params['demand'][demand_pattern]
         tenki = st.session_state.params['tenki'][tenki_name]
+        bat_ini = st.session_state['bat_ini']
         hq.set_params(weather_list=tenki, demand_list=demand)
+        hq.set_params(initial_battery_amount=bat_ini)
         hq.set_params(unit=200, step=8, reschedule_span=8)
         # クライアントの設定
         successful = False
@@ -61,7 +63,7 @@ def create_transition_button(obj):
 def create_form():
     with st.expander('パラメータ', expanded=st.session_state.form_expanded):
         with st.form('form'):
-            c1, c2, c3 = st.columns([0.5, 2, 3])
+            c1, c2, c3, c4 = st.columns([1, 2, 1, 1])
             c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
             c2.selectbox(
                 '需要パターン',
@@ -74,8 +76,18 @@ def create_form():
                 ),
                 key='demand_pattern',
             )
-            c3.text('ボタンを押すと最適化スタート')
-            with c3:
+            c3.number_input(
+                '初期蓄電量',
+                min_value=0,
+                max_value=5000,
+                value=4500,
+                step=500,
+                format='%d (W)',
+                key='bat_ini',
+                help='最初に蓄電池にたまっている電力',
+            )
+            c4.text('ボタンを押すと最適化スタート')
+            with c4:
                 st.form_submit_button(label="スケジューリング！", on_click=solve)
 
 def create_result(hq):
