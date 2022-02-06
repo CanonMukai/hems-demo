@@ -2,6 +2,7 @@ import streamlit as st
 from hemsq import HemsQ
 
 from sub import *
+from top import write
 from sample_result import *
 from article import convert, type_and_text
 
