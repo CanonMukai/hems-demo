@@ -26,7 +26,27 @@ def solve():
     tenki_name = st.session_state['tenki_name']
     demand_pattern = st.session_state['demand_pattern']
     emoji = st.session_state.params['tenki_emoji'][tenki_name]
-    with st.spinner('計算中です...{} すこーーーーしお待ちください...'.format(emoji)):
+    spinner_text = '''
+計算中です...{} すこーーーーしお待ちください...
+
+「少し使いすぎな2人世帯」「5人世帯」の場合はちょっとお時間いただくかもしれませんね...
+
+初期蓄電量が少ない場合もちょっとかかるかも...
+
+速いと10秒弱で終わるのですが、遅いと1分かかるかも...？
+
+このページは dwave-neal という、ありがたいシミュレーテッド・アニーリングの Python パッケージを使っています。
+マシンに比べると少し時間がかかってしまいます...
+
+ここまでお読みになっているということは、結構かかっていますね...
+最悪の場合、答えが出ない場合もあります...
+そのときは、もう一度同じパラメータで最適化ボタンを押し直してみてくださいね...
+
+
+
+それにしても、かかっていますね...
+'''.format(emoji)
+    with st.spinner(spinner_text):
         hq = HemsQ()
         # パラメータの設定
         demand = st.session_state.params['demand'][demand_pattern]
@@ -77,7 +97,7 @@ def create_form():
                 key='demand_pattern',
             )
             c3.number_input(
-                '初期蓄電量',
+                '初期蓄電量 (W)',
                 min_value=0,
                 max_value=5000,
                 value=4500,
