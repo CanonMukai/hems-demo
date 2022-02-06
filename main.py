@@ -26,7 +26,7 @@ def solve():
     tenki_name = st.session_state['tenki_name']
     demand_pattern = st.session_state['demand_pattern']
     emoji = st.session_state.params['tenki_emoji'][tenki_name]
-    with st.spinner('計算中です...{}'.format(emoji)):
+    with st.spinner('計算中です...{} すこーーーーしお待ちください...'.format(emoji)):
         hq = HemsQ()
         # パラメータの設定
         demand = st.session_state.params['demand'][demand_pattern]
@@ -63,7 +63,7 @@ def create_transition_button(obj):
 def create_form():
     with st.expander('パラメータ', expanded=st.session_state.form_expanded):
         with st.form('form'):
-            c1, c2, c3, c4 = st.columns([1, 2, 1, 1])
+            c1, c2, c3, c4 = st.columns([0.7, 2, 1, 1])
             c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
             c2.selectbox(
                 '需要パターン',
@@ -85,9 +85,9 @@ def create_form():
                 key='bat_ini',
                 help='最初に蓄電池にたまっている電力',
             )
-            c4.text('ボタンを押すと最適化スタート')
+            c4.text('最適化スタート')
             with c4:
-                st.form_submit_button(label="スケジューリング！", on_click=solve)
+                st.form_submit_button(label='GO!!', on_click=solve)
 
 def create_result(hq):
     # column を分ける
