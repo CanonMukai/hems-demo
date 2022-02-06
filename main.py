@@ -121,6 +121,7 @@ def common_last():
     pass
 
 def top_page():
+    common_first()
 #     st.write('''
 # 本ページでは、HEMS (Home Energy Management System) における「エネルギーの管理」部分を、アニーリングマシンという次世代コンピュータを用いて効率的にスケジューリングするプロジェクトについて説明しております。
 # ''')
