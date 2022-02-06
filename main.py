@@ -82,7 +82,6 @@ def create_form():
                 max_value=5000,
                 value=4500,
                 step=500,
-                format='%d (W)',
                 key='bat_ini',
                 help='最初に蓄電池にたまっている電力',
             )
