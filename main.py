@@ -72,7 +72,7 @@ def solve():
         hq.set_params(weather_list=tenki, demand_list=demand)
         hq.set_params(initial_battery_amount=bat_ini)
         hq.set_params(unit=200, step=8, reschedule_span=8)
-        if st.session_state.params['cost_ratio'] == '環境優先':
+        if st.session_state.cost_ratio == '環境優先':
             hq.set_params(cost_ratio=0.0)
         successful = False
         for _ in range(10):
@@ -103,7 +103,7 @@ def create_transition_button(obj):
 def create_form():
     with st.expander('パラメータ', expanded=st.session_state.form_expanded):
         with st.form('form'):
-            c1, c2, c3, c4, c5 = st.columns([0.7, 2, 1, 1, 1])
+            c1, c2, c3, c4, c5 = st.columns([0.7, 2, 1, 1, 0.5])
             c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
             c2.selectbox(
                 '需要パターン',
@@ -130,7 +130,7 @@ def create_form():
                 ['コスト優先', '環境優先'],
                 key='cost_ratio',
             )
-            c5.text('最適化スタート')
+            c5.text('最適化')
             with c5:
                 st.form_submit_button(label='GO!!', on_click=solve)
 
@@ -264,13 +264,17 @@ def demo_example_page():
     st.markdown('''
 ##### コスト優先
 ''')
-    col1.metric(label='コスト', value='{} 円'.format(result_cost10env0['cost']))
-    col2.metric(label='CO2排出量', value='{} kg'.format(result_cost10env0['CO2']))
+    col21, col22, col23 = st.columns([1, 1.5, 3])
+    col21.metric(label='コスト', value='{} 円'.format(result_cost10env0['cost']))
+    col22.metric(label='CO2排出量', value='{} kg'.format(result_cost10env0['CO2']))
+    col23.write(' ')
     st.markdown('''
 ##### 環境優先
 ''')
-    col1.metric(label='コスト', value='{} 円'.format(result_cost0env10['cost']))
-    col2.metric(label='CO2排出量', value='{} kg'.format(result_cost0env10['CO2']))
+    col31, col32, col33 = st.columns([1, 1.5, 3])
+    col31.metric(label='コスト', value='{} 円'.format(result_cost0env10['cost']))
+    col32.metric(label='CO2排出量', value='{} kg'.format(result_cost0env10['CO2']))
+    col33.write(' ')
     st.write('※ コスト：環境の比による最適化は完全でなく、現在模索中です。')
 
     st.markdown('''
