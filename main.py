@@ -32,12 +32,12 @@ def solve():
         demand = st.session_state.params['demand'][demand_pattern]
         tenki = st.session_state.params['tenki'][tenki_name]
         hq.set_params(weather_list=tenki, demand_list=demand)
-        hq.set_params(unit=250, step=8, reschedule_span=8)
+        hq.set_params(unit=200, step=8, reschedule_span=8)
         # クライアントの設定
         successful = False
         for _ in range(1):
             result = hq.solve('SA')
-            st.write('result')
+            st.write(result)
             if result:
                 successful = True
     st.session_state.form_expanded = False
