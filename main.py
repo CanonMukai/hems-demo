@@ -34,9 +34,14 @@ def solve():
         hq.set_params(weather_list=tenki, demand_list=demand)
         hq.set_params(unit=250, step=8, reschedule_span=8)
         # クライアントの設定
-        hq.solve('SA')
+        successful = False
+        for _ in range(1):
+            result = hq.solve('SA')
+            st.write('result')
+            if result:
+                successful = True
     st.session_state.form_expanded = False
-    simple_demo_page(hq=hq)
+    simple_demo_page(hq=hq, successful=successful)
 
 
 ############################################
@@ -153,13 +158,19 @@ def top_page():
 ''', unsafe_allow_html=True)
     common_last()
 
-def simple_demo_page(hq=None):
-    if hq == None:
+def simple_demo_page(hq=None, successful=None):
+    if hq == None or successful == False:
         st.session_state.form_expanded = True
     common_first()
     create_form()
     if hq:
-        create_result(hq)
+        if successful:
+            create_result(hq)
+        else:
+            st.error('''
+ごめんなさい、最適化に失敗してしまいました m(_ _)m
+もう一度ボタンを押して試してみてください。次はうまくいきますように。。
+''')
     common_last()
 
 def demo_example_page():
