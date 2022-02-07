@@ -62,6 +62,7 @@ def solve():
 
 右上のピクトグラム、いろいろと蘇りますね、かわいいですね...
 '''.format(emoji)
+    spinner_text = '計算中です...{}'.format(emoji)
     start_time = time.time()
     with st.spinner(spinner_text):
         hq = HemsQ()
@@ -293,10 +294,15 @@ def hemsq_page():
         "Pythonパッケージ `HemsQ` を使用することで"
         "より詳細なパラメータを試すことが可能です。"
         "フィックスターズ社の Fixtars Amplify AE と併用する形になります。")
+    st.markdown('''
+    <a href="https://colab.research.google.com/drive/18BPHExIrYWZrwwYUFU4KvRjNbFCvrDi3?usp=sharing"
+        target="_blank" rel="noopener noreferrer">
+            <button type="button" style="border-radius:5px;">サンプルコードをGoogle Colabで開く🧪</button>
+    </a>''',
+        unsafe_allow_html=True)
     st.write("以下のコマンドでインストールしてください。")
     st.code("""
-$ pip install git+https://github.com/CanonMukai/hemsq-prototype.git
-$ pip install amplify
+$ pip install git+https://github.com/HemsQ/hemsq.git
     """)
     st.write("次のようにインポートし、オブジェクトを作成します。")
     st.code("""
@@ -304,19 +310,26 @@ from hemsq import HemsQ
 hq = HemsQ()
     """, language="python")
     st.write(
-        "また `amplify` も同様にインポートし、"
+        "また `amplify` のクライアントも同様にインポートし、"
         "マシンのクライアントの設定を行ってください。")
     st.code("""
-from amplify.client import XXXClient
-client = XXXClient()
+# Fixstars の場合
+from amplify.client import Fixstarslient
+
+client = FixstarsClient()
+client.token = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" # アクセストークン
+client.parameters.timeout = 1000 # タイムアウト1秒
+client.parameters.outputs.num_outputs = 0
+client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
 hq.set_client(client)
     """, language="python")
-    st.markdown('''
-    <a href="https://colab.research.google.com/drive/18BPHExIrYWZrwwYUFU4KvRjNbFCvrDi3?usp=sharing"
-        target="_blank" rel="noopener noreferrer">
-            <button type="button">Google Colabで開く🧪</button>
-    </a>''',
-        unsafe_allow_html=True)
+    st.write("まずはデフォルトのパラメータで実行してみましょう！")
+    st.code("""
+# 最適化
+hq.solve()
+# 可視化
+hq.show_all()
+    """, language="python")
     common_last()
 
 ############################################
