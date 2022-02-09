@@ -4,7 +4,7 @@ import streamlit as st
 from hemsq import HemsQ
 
 from sub import *
-from top import write
+from top import write, top
 from sample_result import *
 from article import convert, type_and_text
 
@@ -183,36 +183,7 @@ def common_last():
     pass
 
 def top_page():
-    common_first()
-#     st.write('''
-# 本ページでは、HEMS (Home Energy Management System) における「エネルギーの管理」部分を、アニーリングマシンという次世代コンピュータを用いて効率的にスケジューリングするプロジェクトについて説明しております。
-# ''')
-    c1, c2, c3, c4 = st.columns([1, 1, 1, 1])
-    c1.image('https://drive.google.com/uc?export=view&id=1JLZzu_2tgNxuhpqBj5QoXjgqeANJugMJ&usp=sharing')
-    c2.button('デモ', key='デモトップ', on_click=st.session_state.pages[1].func)
-    c2.write('お天気、需要パターンを選択して簡単なシミュレーションができます！')
-    c2.button('実行例', key='実行例トップ', on_click=st.session_state.pages[2].func)
-    c2.write('HemsQを用いて得たスケジュールを簡単に可視化しています。')
-    c2.button('アニーリングマシンでの解き方', key='解き方トップ', on_click=st.session_state.pages[3].func)
-    c2.write('アニーリングマシンで HEMS の最適化をするにあたって、どのような定式化を行なっているのかを解説しています。')
-    c2.button('HemsQの詳細', key='HemsQトップ', on_click=st.session_state.pages[4].func)
-    c2.write('Python で動かすことのできる HemsQ の使い方について解説しています。')
-    c2.markdown('''
-<span>
-<a href="https://colab.research.google.com/drive/18BPHExIrYWZrwwYUFU4KvRjNbFCvrDi3?usp=sharing"
-        target="_blank" rel="noopener noreferrer">Google Colab</a>
-    で実行できるコードもあります。
-</span>
-''', unsafe_allow_html=True)
-    st.markdown('''
-<br><br>
-<span>
-    ※ 本プロジェクトは、
-<a href="https://www.ipa.go.jp/jinzai/target/index.html"
-        target="_blank" rel="noopener noreferrer">未踏ターゲット事業</a>
-    のサポートにより進めさせていただいています。
-</span>
-''', unsafe_allow_html=True)
+    top()
     common_last()
 
 def simple_demo_page(hq=None, successful=None):
