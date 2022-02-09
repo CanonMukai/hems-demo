@@ -62,12 +62,4 @@ NEWS
     for c in sukima2_text:
         write_white(sukima2_col, c)
     write_white(st, sukima3_text)
-    # event()
-    st.text_input(
-        'この下に入力欄があるよ',
-        placeholder='来たるイベントに必須の食べ物は？',
-        key='special_event',
-        on_change=st.session_state.pages['TOP'].func)
-    if st.session_state.special_event in [
-            'チョコ', 'チョコレート', '🍫', 'ショコラ', 'chocolate', 'ちょこ', 'ちよこれーと']:
-        display()
+    event()
