@@ -188,7 +188,7 @@ def top_page():
 # 本ページでは、HEMS (Home Energy Management System) における「エネルギーの管理」部分を、アニーリングマシンという次世代コンピュータを用いて効率的にスケジューリングするプロジェクトについて説明しております。
 # ''')
     c1, c2, c3, c4 = st.columns([1, 1, 1, 1])
-    c1.image('https://drive.google.com/uc?export=view&id=1qOPQvru_tcXQ3myIAZQ7its_igPGlVSW&usp=sharing')
+    c1.image('https://drive.google.com/uc?export=view&id=1JLZzu_2tgNxuhpqBj5QoXjgqeANJugMJ&usp=sharing')
     c2.button('デモ', key='デモトップ', on_click=st.session_state.pages[1].func)
     c2.write('お天気、需要パターンを選択して簡単なシミュレーションができます！')
     c2.button('実行例', key='実行例トップ', on_click=st.session_state.pages[2].func)

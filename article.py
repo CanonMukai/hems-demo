@@ -17,11 +17,8 @@ type_and_text = [
         'type': 'markdown',
         'body': '''
 <div style="text-align: center">
-    <figure>
-        <img src="https://drive.google.com/uc?export=view&id=1qOPQvru_tcXQ3myIAZQ7its_igPGlVSW&usp=sharing"
-            width='400'>
-        <figcaption>出典 iエネ コンソーシアム「HEMSとは？」</figcaption>
-    </figure>
+    <img src="https://drive.google.com/uc?export=view&id=1JLZzu_2tgNxuhpqBj5QoXjgqeANJugMJ&usp=sharing"
+        width='400'>
 </div>
 ''',
     },
