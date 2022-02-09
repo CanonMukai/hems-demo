@@ -44,8 +44,8 @@ NEWS
     
     page_col.button('デモ', key='デモトップ', on_click=st.session_state.pages['デモ'].func)
     page_col.write('お天気、需要パターンを選択して簡単なシミュレーションができます！')
-    page_col.button('実行例', key='実行例トップ', on_click=st.session_state.pages['実行例'].func)
-    page_col.write('HemsQを用いて得たスケジュールを簡単に可視化しています。')
+    # page_col.button('実行例', key='実行例トップ', on_click=st.session_state.pages['実行例'].func)
+    # page_col.write('HemsQを用いて得たスケジュールを簡単に可視化しています。')
     page_col.button('アニーリングマシンでの解き方', key='解き方トップ', on_click=st.session_state.pages['アニーリングマシンでの解き方'].func)
     page_col.write('アニーリングマシンで HEMS の最適化をするにあたって、どのような定式化を行なっているのかを解説しています。')
     page_col.button('HemsQの詳細', key='HemsQトップ', on_click=st.session_state.pages['HemsQの詳細'].func)
