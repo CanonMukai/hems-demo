@@ -1,29 +1,27 @@
 text_css = f'''
-/*<head>*/
-    <style>
+<style>
+    .hide {{
+        color: rgba(0, 0, 0, 0);
+    }}
+    .hide:hover {{
+        color: rgba(0, 255, 200, 0.15);
+    }}
+    .hide::selection {{
+        color: lightblue;
+    }}
+    ::-moz-selection {{
+        color: lightblue;
+    }}
+    @media (prefers-color-scheme: dark) {{
+        body {{
+            background-color: #000;
+            color: #fff;
+        }}
         .hide {{
             color: rgba(0, 0, 0, 0);
         }}
-        .hide:hover {{
-            color: rgba(0, 255, 200, 0.15);
-        }}
-        .hide::selection {{
-            color: lightblue;
-        }}
-        ::-moz-selection {{
-            color: lightblue;
-        }}
-        @media (prefers-color-scheme: dark) {{
-            body {{
-                background-color: #000;
-                color: #fff;
-            }}
-            .hide {{
-                color: rgba(0, 0, 0, 0);
-            }}
-        }}
-    </style>
-/*</head>*/
+    }}
+</style>
 '''
 
 text_input_css = f"""
