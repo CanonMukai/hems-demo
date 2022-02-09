@@ -17,7 +17,7 @@ type_and_text = [
         'type': 'markdown',
         'body': '''
 <div style="text-align: center">
-    <img src="https://drive.google.com/uc?export=view&id=1JLZzu_2tgNxuhpqBj5QoXjgqeANJugMJ&usp=sharing"
+    <img src="https://drive.google.com/uc?export=view&id=1eTM1pZpY0zi31fzcRXV4Y5B-W4wo-B8K&usp=sharing"
         width='400'>
 </div>
 ''',
