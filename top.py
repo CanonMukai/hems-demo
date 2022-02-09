@@ -1,6 +1,7 @@
 import streamlit as st
 
 from event import *
+from css import *
 
 
 def write(obj, text):
@@ -9,6 +10,7 @@ def write(obj, text):
         unsafe_allow_html=True)
 
 def write_white(obj, text):
+    obj.markdown(text_css, unsafe_allow_html=True)
     obj.markdown(
 f'''
 <span class="hide">
