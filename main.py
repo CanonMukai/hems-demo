@@ -179,6 +179,13 @@ def common_first():
 ### ~ エネルギー最適化をアニーリングマシンで ~
 ''')
     write(st, '<br>')
+    st.sidebar.code('''
+NEWS
+
+22.02.11
+ - サイトがオープンしました！
+ - HemsQ の試用を開始しました。
+''')
     # ページ遷移ボタン
     create_transition_button(st.sidebar)
 
@@ -189,6 +196,7 @@ def top_page():
     st.session_state.last_page = 'TOP'
     st.markdown(text_css, unsafe_allow_html=True)
     st.markdown(text_input_css, unsafe_allow_html=True)
+    common_first()
     top()
     common_last()
 

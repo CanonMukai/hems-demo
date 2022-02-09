@@ -18,19 +18,7 @@ f'''
         unsafe_allow_html=True)
 
 def top():
-    st.title('🏠💡 HemsQ 🌦🏠')
-    st.markdown('''
-### ~ エネルギー最適化をアニーリングマシンで ~
-''')
-    write(st, '<br>')
     fig_col, sukima1_col, page_col, sukima2_col = st.columns([10, 0.5, 9, 0.5])
-    st.sidebar.code('''
-NEWS
-
-22.02.11
- - サイトがオープンしました！
- - HemsQ の試用を開始しました。
-''')
     fig_col.image('https://drive.google.com/uc?export=view&id=1JLZzu_2tgNxuhpqBj5QoXjgqeANJugMJ&usp=sharing')
     
     page_col.button('デモ', key='デモトップ', on_click=st.session_state.pages['デモ'].func)
