@@ -74,5 +74,3 @@ NEWS
     if event():
         top()
         display()
-
-top()

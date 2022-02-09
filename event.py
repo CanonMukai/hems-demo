@@ -9,7 +9,7 @@ def event():
     text = st.session_state.special_event
     return text in ['チョコ', 'チョコレート', '🍫', 'ショコラ', 'chocolate', 'ちょこ', 'ちよこれーと']
 
-def display()
+def display():
     st.write('お見事！！')
     st.image('https://drive.google.com/uc?export=view&id=1W0TtWXV5O-7emlBPv5OWE3VDBN9Gr1w6&usp=sharing')
 
