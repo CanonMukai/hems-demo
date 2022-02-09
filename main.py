@@ -183,10 +183,12 @@ def common_last():
     pass
 
 def top_page():
+    st.session_state.last_page = 'TOP'
     top()
     common_last()
 
 def simple_demo_page(hq=None, successful=None):
+    st.session_state.last_page = 'デモ'
     if hq == None or successful == False:
         st.session_state.form_expanded = True
     common_first()
@@ -207,6 +209,7 @@ def simple_demo_page(hq=None, successful=None):
     common_last()
 
 def demo_example_page():
+    st.session_state.last_page = '実行例'
     common_first()
     st.markdown('''
 ### 初期蓄電量による違い
@@ -255,11 +258,13 @@ def demo_example_page():
     common_last()
 
 def explanation_page():
+    st.session_state.last_page = 'アニーリングマシンでの解き方'
     common_first()
     convert(type_and_text)
     common_last()
 
 def hemsq_page():
+    st.session_state.last_page = 'HemsQの詳細'
     common_first()
     st.write(
         "Pythonパッケージ `HemsQ` を使用することで"
@@ -369,6 +374,9 @@ if 'params' not in st.session_state:
             '5人世帯 (日中在宅3人）': ['5人世帯', '👴 👵 👨 👩 👶', '日中在宅3人', '👴 👵 👶'],
         },
     }
+if 'last_page' not in st.session_state:
+    st.session_state.last_page = 'TOP'
+
 
 ############################################
 # main
@@ -380,5 +388,7 @@ if __name__ == '__main__':
     # st.session_state
     if st.session_state.init:
         # simple_demo_page()
-        top_page()
+        # top_page()
+        page = st.session_state.last_page
+        st.session_state.pages[page].func()
         st.session_state.init = False
