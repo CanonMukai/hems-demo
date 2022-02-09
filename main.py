@@ -351,13 +351,14 @@ HEMSQ_PAGE = Page("HemsQの詳細", hemsq_page)
 # 何かアクションを起こすたびに実行される
 if "init" not in st.session_state:
     st.session_state.init = True
-st.session_state.pages = {
-    TOP_PAGE.name: TOP_PAGE,
-    SIMPLE_DEMO_PAGE.name: SIMPLE_DEMO_PAGE,
-    DEMO_EXAMPLE_PAGE.name: DEMO_EXAMPLE_PAGE,
-    EXPLANATION_PAGE.name: EXPLANATION_PAGE,
-    HEMSQ_PAGE.name: HEMSQ_PAGE,
-}
+if 'pages' not in st.session_state:
+    st.session_state.pages = {
+        TOP_PAGE.name: TOP_PAGE,
+        SIMPLE_DEMO_PAGE.name: SIMPLE_DEMO_PAGE,
+        DEMO_EXAMPLE_PAGE.name: DEMO_EXAMPLE_PAGE,
+        EXPLANATION_PAGE.name: EXPLANATION_PAGE,
+        HEMSQ_PAGE.name: HEMSQ_PAGE,
+    }
 if 'form_expanded' not in st.session_state:
     st.session_state.form_expanded = True
 if 'params' not in st.session_state:

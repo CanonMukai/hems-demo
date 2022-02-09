@@ -13,9 +13,7 @@ def write_white(obj, text):
     obj.markdown(text_css, unsafe_allow_html=True)
     obj.markdown(
 f'''
-<span class="hide">
-{text}
-</span>
+<span class="hide">{text}</span>
 ''',
         unsafe_allow_html=True)
 
