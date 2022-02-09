@@ -42,13 +42,13 @@ NEWS
 ''')
     fig_col.image('https://drive.google.com/uc?export=view&id=1JLZzu_2tgNxuhpqBj5QoXjgqeANJugMJ&usp=sharing')
     
-    page_col.button('デモ', key='デモトップ', on_click=st.session_state.pages[1].func)
+    page_col.button('デモ', key='デモトップ', on_click=st.session_state.pages['デモ'].func)
     page_col.write('お天気、需要パターンを選択して簡単なシミュレーションができます！')
-    page_col.button('実行例', key='実行例トップ', on_click=st.session_state.pages[2].func)
+    page_col.button('実行例', key='実行例トップ', on_click=st.session_state.pages['実行例'].func)
     page_col.write('HemsQを用いて得たスケジュールを簡単に可視化しています。')
-    page_col.button('アニーリングマシンでの解き方', key='解き方トップ', on_click=st.session_state.pages[3].func)
+    page_col.button('アニーリングマシンでの解き方', key='解き方トップ', on_click=st.session_state.pages['アニーリングマシンでの解き方'].func)
     page_col.write('アニーリングマシンで HEMS の最適化をするにあたって、どのような定式化を行なっているのかを解説しています。')
-    page_col.button('HemsQの詳細', key='HemsQトップ', on_click=st.session_state.pages[4].func)
+    page_col.button('HemsQの詳細', key='HemsQトップ', on_click=st.session_state.pages['HemsQの詳細'].func)
     page_col.write('Python で動かすことのできる HemsQ の使い方について解説しています。')
     page_col.markdown('''
 <span>
