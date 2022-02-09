@@ -7,6 +7,7 @@ from sub import *
 from top import write, top
 from sample_result import *
 from article import convert, type_and_text
+from css import *
 
 ############################################
 # Streamlit 全体の設定
@@ -18,6 +19,8 @@ st.set_page_config(
     layout='wide',
     initial_sidebar_state='expanded',
 )
+st.markdown(text_css, unsafe_allow_html=True)
+st.markdown(text_input_css, unsafe_allow_html=True)
 
 
 ############################################

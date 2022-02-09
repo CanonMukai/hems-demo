@@ -1,14 +1,7 @@
 import streamlit as st
 
-from css import *
 from event import *
 
-st.set_page_config(
-    page_title='HEMSデモ',
-    page_icon='🏠',
-    layout='wide',
-    initial_sidebar_state='expanded',
-)
 
 def write(obj, text):
     obj.write(
@@ -25,8 +18,6 @@ f'''
         unsafe_allow_html=True)
 
 def top():
-    st.markdown(text_css, unsafe_allow_html=True)
-    st.markdown(text_input_css, unsafe_allow_html=True)
     st.title('🏠💡 HemsQ 🌦🏠')
     st.markdown('''
 ### ~ エネルギー最適化をアニーリングマシンで ~
