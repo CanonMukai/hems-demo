@@ -1,5 +1,5 @@
 text_css = f'''
-<head>
+/*<head>*/
     <style>
         .hide {{
             color: rgba(0, 0, 0, 0);
@@ -23,7 +23,7 @@ text_css = f'''
             }}
         }}
     </style>
-</head>
+/*</head>*/
 '''
 
 text_input_css = f"""
