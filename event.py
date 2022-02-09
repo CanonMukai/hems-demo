@@ -10,7 +10,7 @@ def event():
             'チョコ', 'チョコレート', '🍫', 'ショコラ', 'chocolate', 'ちょこ',
             'ちよこれーと', 'ちよこれいと']:
         display()
-        question()
+        # question()
 
 def display():
     st.write('お見事！！')
@@ -18,7 +18,7 @@ def display():
 
 def question():
     st.write('アンケートにご協力お願いいたします。')
-    with st.form('form'):
+    with st.form('question_form'):
         options = st.multiselect(
             'どのようにして気づかれましたか？(複数回答可)',
             options=[
@@ -31,8 +31,6 @@ def question():
         st.form_submit_button(
             label='送信',
             on_click=st.session_state.pages['TOP'].func)
-    if 'question' in st.session_state:
-        st.write('ご協力ありがとうございました。')
 
 sukima1_text = 'はっ！お気づきになられましたか！'
 sukima2_text = 'ここもお気づきになられましたか！もう一息'
