@@ -187,6 +187,8 @@ def common_last():
 
 def top_page():
     st.session_state.last_page = 'TOP'
+    st.markdown(text_css, unsafe_allow_html=True)
+    st.markdown(text_input_css, unsafe_allow_html=True)
     top()
     common_last()
 
