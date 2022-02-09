@@ -100,7 +100,7 @@ def create_transition_button(obj):
         for page in st.session_state.pages.values():
             button = st.button(
                 "{}".format(page.name),
-                key="button{}".format(page.name),
+                key="button{}{}".format(page.name, time.time()),
                 on_click=page.func,
             )
 
