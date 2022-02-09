@@ -71,6 +71,8 @@ NEWS
     for c in sukima2_text:
         write_white(sukima2_col, c)
     write_white(st, sukima3_text)
-    event()
+    if event():
+        top()
+        display()
 
 top()
