@@ -124,9 +124,9 @@ side_button_css = '''
 
 div.stButton > button:first-child {
     text-align: center;
-    font-size: 20px;
     color: var(--button-text);
-    border-radius: 20px;
+    border: none;
+    border-radius: 5px;
     box-shadow: 0 0 0 2px var(--button);
     width: 100%;
 }
