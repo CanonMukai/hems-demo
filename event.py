@@ -2,7 +2,7 @@ import streamlit as st
 
 def event():
     st.text_input(
-        'この下に入力欄があるよ',
+        'よくお気づきになられました！！この少し下をタップしてみてください',
         placeholder='来たるイベントに必須の食べ物は？',
         key='special_event',
         on_change=st.session_state.pages['TOP'].func)
@@ -32,6 +32,4 @@ def question():
             label='送信',
             on_click=st.session_state.pages['TOP'].func)
 
-sukima1_text = 'はっ！お気づきになられましたか！'
-sukima2_text = 'ここもお気づきになられましたか！もう一息'
-sukima3_text = 'Super Dark Mode ユーザーには弱い...'
+sukima_text = '...お？おおおおおお？'

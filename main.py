@@ -183,7 +183,6 @@ def common_last():
 
 def top_page():
     st.session_state.last_page = 'TOP'
-    # common_first()
     top()
     common_last()
 
@@ -252,9 +251,9 @@ def demo_example_page():
     col33.write(' ')
     st.write('※ コスト：環境の比による最適化は完全でなく、現在模索中です。')
 
-    st.markdown('''
-### 天気による違い
-''')
+#     st.markdown('''
+# ### 天気による違い
+# ''')
     common_last()
 
 def explanation_page():
@@ -301,7 +300,7 @@ client.parameters.outputs.num_outputs = 0
 client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
 hq.set_client(client)
     """, language="python")
-    st.write("まずはデフォルトのパラメータで実行してみましょう！")
+    st.write("デフォルトのパラメータで実行してみましょう！")
     st.code("""
 # 最適化
 hq.solve()

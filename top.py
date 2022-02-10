@@ -29,7 +29,7 @@ def top():
     left_col.button('Google Colab & pip install', key='HemsQトップ', on_click=st.session_state.pages['HemsQの詳細'].func)
     
     st.markdown('''
-<br><br>
+<br>
 <span>
     ※ 本プロジェクトは、
 <a href="https://www.ipa.go.jp/jinzai/target/index.html"
@@ -37,11 +37,7 @@ def top():
     のサポートの元進めております。
 </span>
 ''', unsafe_allow_html=True)
-    # st.markdown(text_css, unsafe_allow_html=True)
+    st.markdown(text_css, unsafe_allow_html=True)
     st.markdown(text_input_css, unsafe_allow_html=True)
-    # for c in sukima1_text:
-    #     write_white(sukima1_col, c)
-    # for c in sukima2_text:
-    #     write_white(sukima2_col, c)
-    # write_white(st, sukima3_text)
+    write_white(st, sukima_text)
     event()
