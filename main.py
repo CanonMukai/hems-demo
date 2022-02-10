@@ -105,7 +105,7 @@ def create_transition_button(obj):
 def create_form():
     with st.expander('パラメータ', expanded=st.session_state.form_expanded):
         with st.form('form'):
-            c1, c2, c3, c4, c5 = st.columns([0.7, 2, 1, 1, 0.5])
+            c1, c2, c3, c4, c5 = st.columns([0.7, 2, 1, 0.8, 0.7])
             c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
             c2.selectbox(
                 '需要パターン',
@@ -172,7 +172,7 @@ def create_result(hq):
 
 def common_first():
     # タイトル
-    st.markdown('<img src="https://drive.google.com/uc?export=view&id=1G3dz52ZxDkXJUXVBvJ-itZnCB6WZGZsJ&usp=sharing" width="100%"><br>',
+    st.markdown('<img src="https://drive.google.com/uc?export=view&id=1Pr0SqODXkkGiG5_v1sFHQ3kobc7URdN_&usp=sharing" width="100%"><br>',
         unsafe_allow_html=True)
     # ページ遷移ボタン
     st.markdown(side_button_css, unsafe_allow_html=True)
