@@ -279,10 +279,12 @@ def hemsq_page():
         "Pythonパッケージ `HemsQ` を使用することで"
         "より詳細なパラメータを試すことが可能です。"
         "フィックスターズ社の Fixtars Amplify AE と併用する形になります。")
+    
+    st.markdown(colab_button_css, unsafe_allow_html=True)
     st.markdown('''
     <a href="https://colab.research.google.com/drive/18BPHExIrYWZrwwYUFU4KvRjNbFCvrDi3?usp=sharing"
         target="_blank" rel="noopener noreferrer">
-            <button type="button" style="border-radius:5px;">サンプルコードをGoogle Colabで開く🧪</button>
+            <button type="button" class="colab">サンプルコードをGoogle Colabで開く🧪</button>
     </a>''',
         unsafe_allow_html=True)
     st.write("以下のコマンドでインストールしてください。")

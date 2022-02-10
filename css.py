@@ -57,3 +57,28 @@ text_input_css = f"""
 }}
 </style>
 """
+
+colab_button_css = '''
+<style>
+.colab {
+    color: #fff;
+    background: linear-gradient(to bottom, darkorange, #ffc000);
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+}
+.colab:hover {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 197, 30, 0.4), 0 8px 10px 8px rgba(255, 197, 30, 0.10);
+}
+.colab:focus {
+    color: orange;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px orange;
+}
+</style>
+'''
