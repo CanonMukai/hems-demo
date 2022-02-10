@@ -95,10 +95,11 @@ div.stButton > button:first-child {
     text-align: center;
     font-size: 20px;
     color: var(--button-text);
+    border: none;
     border-radius: 20px;
     box-shadow: 0 0 0 2px var(--button);
     width: 100%;
-    height: 160px;
+    height: 200px;
 }
 div.stButton > button:first-child:hover {
     color: #fff;
