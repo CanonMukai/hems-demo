@@ -4,9 +4,10 @@ import streamlit as st
 from hemsq import HemsQ
 
 from sub import *
-from top import write
+from top import write, top
 from sample_result import *
 from article import convert, type_and_text
+from css import *
 
 ############################################
 # Streamlit 全体の設定
@@ -94,17 +95,17 @@ def solve():
 def create_transition_button(obj):
     # obj に st は使えない
     with obj:
-        for page in st.session_state.pages:
+        for page in st.session_state.pages.values():
             button = st.button(
                 "{}".format(page.name),
-                key="button{}".format(page.name),
+                key="button{}{}".format(page.name, time.time()),
                 on_click=page.func,
             )
 
 def create_form():
     with st.expander('パラメータ', expanded=st.session_state.form_expanded):
         with st.form('form'):
-            c1, c2, c3, c4, c5 = st.columns([0.7, 2, 1, 1, 0.5])
+            c1, c2, c3, c4, c5 = st.columns([0.7, 2, 1, 0.8, 0.7])
             c1.selectbox('お天気', ['晴れ', '曇り', '雨'], key='tenki_name')
             c2.selectbox(
                 '需要パターン',
@@ -171,51 +172,22 @@ def create_result(hq):
 
 def common_first():
     # タイトル
-    st.title('🏠💡 HemsQ 🌦🏠')
-    st.markdown('''
-### ~ エネルギー最適化をアニーリングマシンで ~
-''')
-    write(st, '<br>')
+    st.markdown('<img src="https://drive.google.com/uc?export=view&id=1Pr0SqODXkkGiG5_v1sFHQ3kobc7URdN_&usp=sharing" width="100%"><br>',
+        unsafe_allow_html=True)
     # ページ遷移ボタン
+    st.markdown(side_button_css, unsafe_allow_html=True)
     create_transition_button(st.sidebar)
 
 def common_last():
     pass
 
 def top_page():
-    common_first()
-#     st.write('''
-# 本ページでは、HEMS (Home Energy Management System) における「エネルギーの管理」部分を、アニーリングマシンという次世代コンピュータを用いて効率的にスケジューリングするプロジェクトについて説明しております。
-# ''')
-    c1, c2, c3, c4 = st.columns([1, 1, 1, 1])
-    c1.image('https://drive.google.com/uc?export=view&id=1JLZzu_2tgNxuhpqBj5QoXjgqeANJugMJ&usp=sharing')
-    c2.button('デモ', key='デモトップ', on_click=st.session_state.pages[1].func)
-    c2.write('お天気、需要パターンを選択して簡単なシミュレーションができます！')
-    c2.button('実行例', key='実行例トップ', on_click=st.session_state.pages[2].func)
-    c2.write('HemsQを用いて得たスケジュールを簡単に可視化しています。')
-    c2.button('アニーリングマシンでの解き方', key='解き方トップ', on_click=st.session_state.pages[3].func)
-    c2.write('アニーリングマシンで HEMS の最適化をするにあたって、どのような定式化を行なっているのかを解説しています。')
-    c2.button('HemsQの詳細', key='HemsQトップ', on_click=st.session_state.pages[4].func)
-    c2.write('Python で動かすことのできる HemsQ の使い方について解説しています。')
-    c2.markdown('''
-<span>
-<a href="https://colab.research.google.com/drive/18BPHExIrYWZrwwYUFU4KvRjNbFCvrDi3?usp=sharing"
-        target="_blank" rel="noopener noreferrer">Google Colab</a>
-    で実行できるコードもあります。
-</span>
-''', unsafe_allow_html=True)
-    st.markdown('''
-<br><br>
-<span>
-    ※ 本プロジェクトは、
-<a href="https://www.ipa.go.jp/jinzai/target/index.html"
-        target="_blank" rel="noopener noreferrer">未踏ターゲット事業</a>
-    のサポートにより進めさせていただいています。
-</span>
-''', unsafe_allow_html=True)
+    st.session_state.last_page = 'TOP'
+    top()
     common_last()
 
 def simple_demo_page(hq=None, successful=None):
+    st.session_state.last_page = 'デモ'
     if hq == None or successful == False:
         st.session_state.form_expanded = True
     common_first()
@@ -236,6 +208,7 @@ def simple_demo_page(hq=None, successful=None):
     common_last()
 
 def demo_example_page():
+    st.session_state.last_page = '実行例'
     common_first()
     st.markdown('''
 ### 初期蓄電量による違い
@@ -278,26 +251,30 @@ def demo_example_page():
     col33.write(' ')
     st.write('※ コスト：環境の比による最適化は完全でなく、現在模索中です。')
 
-    st.markdown('''
-### 天気による違い
-''')
+#     st.markdown('''
+# ### 天気による違い
+# ''')
     common_last()
 
 def explanation_page():
+    st.session_state.last_page = 'アニーリングマシンでの解き方'
     common_first()
     convert(type_and_text)
     common_last()
 
 def hemsq_page():
+    st.session_state.last_page = 'HemsQの詳細'
     common_first()
     st.write(
         "Pythonパッケージ `HemsQ` を使用することで"
         "より詳細なパラメータを試すことが可能です。"
         "フィックスターズ社の Fixtars Amplify AE と併用する形になります。")
+    
+    st.markdown(colab_button_css, unsafe_allow_html=True)
     st.markdown('''
     <a href="https://colab.research.google.com/drive/18BPHExIrYWZrwwYUFU4KvRjNbFCvrDi3?usp=sharing"
         target="_blank" rel="noopener noreferrer">
-            <button type="button" style="border-radius:5px;">サンプルコードをGoogle Colabで開く🧪</button>
+            <button type="button" class="colab">Google Colabで開く</button>
     </a>''',
         unsafe_allow_html=True)
     st.write("以下のコマンドでインストールしてください。")
@@ -323,7 +300,7 @@ client.parameters.outputs.num_outputs = 0
 client.parameters.outputs.duplicate = True # エネルギー値が同一の解を重複して出力する
 hq.set_client(client)
     """, language="python")
-    st.write("まずはデフォルトのパラメータで実行してみましょう！")
+    st.write("デフォルトのパラメータで実行してみましょう！")
     st.code("""
 # 最適化
 hq.solve()
@@ -362,13 +339,14 @@ HEMSQ_PAGE = Page("HemsQの詳細", hemsq_page)
 # 何かアクションを起こすたびに実行される
 if "init" not in st.session_state:
     st.session_state.init = True
-st.session_state.pages = [
-    TOP_PAGE,
-    SIMPLE_DEMO_PAGE,
-    DEMO_EXAMPLE_PAGE,
-    EXPLANATION_PAGE,
-    HEMSQ_PAGE,
-]
+if 'pages' not in st.session_state:
+    st.session_state.pages = {
+        TOP_PAGE.name: TOP_PAGE,
+        SIMPLE_DEMO_PAGE.name: SIMPLE_DEMO_PAGE,
+        DEMO_EXAMPLE_PAGE.name: DEMO_EXAMPLE_PAGE,
+        EXPLANATION_PAGE.name: EXPLANATION_PAGE,
+        HEMSQ_PAGE.name: HEMSQ_PAGE,
+    }
 if 'form_expanded' not in st.session_state:
     st.session_state.form_expanded = True
 if 'params' not in st.session_state:
@@ -398,6 +376,9 @@ if 'params' not in st.session_state:
             '5人世帯 (日中在宅3人）': ['5人世帯', '👴 👵 👨 👩 👶', '日中在宅3人', '👴 👵 👶'],
         },
     }
+if 'last_page' not in st.session_state:
+    st.session_state.last_page = 'TOP'
+
 
 ############################################
 # main
@@ -409,5 +390,7 @@ if __name__ == '__main__':
     # st.session_state
     if st.session_state.init:
         # simple_demo_page()
-        top_page()
+        # top_page()
+        page = st.session_state.last_page
+        st.session_state.pages[page].func()
         st.session_state.init = False
