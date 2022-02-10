@@ -62,10 +62,10 @@ def top():
     fig_col, left_col, right_col = st.columns([1.8, 1, 1])
     fig_col.image("https://drive.google.com/uc?export=view&id=1JLZzu_2tgNxuhpqBj5QoXjgqeANJugMJ&usp=sharing")
     st.markdown(button_css, unsafe_allow_html=True)
-    left_col.button('デモを動かそう')
-    right_col.button('定式化のしかた')
-    right_col.button('実行例を見てみよう')
-    left_col.button('Google Colab & pip install')
+    left_col.button('デモを動かそう', key='デモトップ', on_click=st.session_state.pages['デモ'].func)
+    right_col.button('定式化のしかた', key='解き方トップ', on_click=st.session_state.pages['アニーリングマシンでの解き方'].func)
+    right_col.button('実行例を見てみよう', key='実行例トップ', on_click=st.session_state.pages['実行例'].func)
+    left_col.button('Google Colab & pip install', key='HemsQトップ', on_click=st.session_state.pages['HemsQの詳細'].func)
     
     st.markdown('''
 <br><br>
