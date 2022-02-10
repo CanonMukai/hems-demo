@@ -172,19 +172,10 @@ def create_result(hq):
 
 def common_first():
     # タイトル
-    st.title('🏠💡 HemsQ 🌦🏠')
-    st.markdown('''
-### ~ エネルギー最適化をアニーリングマシンで ~
-''')
-    write(st, '<br>')
-    st.sidebar.code('''
-NEWS
-
-22.02.11
- - サイトがオープンしました！
- - HemsQ の試用を開始しました。
-''')
+    st.markdown('<img src="https://drive.google.com/uc?export=view&id=1G3dz52ZxDkXJUXVBvJ-itZnCB6WZGZsJ&usp=sharing" width="100%"><br>',
+        unsafe_allow_html=True)
     # ページ遷移ボタン
+    st.markdown(side_button_css, unsafe_allow_html=True)
     create_transition_button(st.sidebar)
 
 def common_last():

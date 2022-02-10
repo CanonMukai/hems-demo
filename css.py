@@ -114,3 +114,33 @@ div.stButton > button:first-child:focus {
 }
 </style>
 '''
+
+side_button_css = '''
+<style>
+:root {
+  --button: #aabbb0;
+  --button-text: #777777;
+}
+
+div.stButton > button:first-child {
+    text-align: center;
+    font-size: 20px;
+    color: var(--button-text);
+    border-radius: 20px;
+    box-shadow: 0 0 0 2px var(--button);
+    width: 100%;
+}
+div.stButton > button:first-child:hover {
+    color: #fff;
+    border: none;
+    background: var(--button);
+    opacity:1;
+    transition: 0.5s all;
+}
+div.stButton > button:first-child:focus {
+    color: #fff;
+    border: none;
+    background: var(--button);
+}
+</style>
+'''
