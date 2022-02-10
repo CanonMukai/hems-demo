@@ -284,7 +284,7 @@ def hemsq_page():
     st.markdown('''
     <a href="https://colab.research.google.com/drive/18BPHExIrYWZrwwYUFU4KvRjNbFCvrDi3?usp=sharing"
         target="_blank" rel="noopener noreferrer">
-            <button type="button" class="colab">サンプルコードをGoogle Colabで開く🧪</button>
+            <button type="button" class="colab">Google Colabで開く</button>
     </a>''',
         unsafe_allow_html=True)
     st.write("以下のコマンドでインストールしてください。")
