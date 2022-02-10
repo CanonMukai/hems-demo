@@ -19,8 +19,8 @@ st.set_page_config(
     layout='wide',
     initial_sidebar_state='expanded',
 )
-st.markdown(text_css, unsafe_allow_html=True)
-st.markdown(text_input_css, unsafe_allow_html=True)
+# st.markdown(text_css, unsafe_allow_html=True)
+# st.markdown(text_input_css, unsafe_allow_html=True)
 
 
 ############################################
