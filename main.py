@@ -192,7 +192,7 @@ def common_last():
 
 def top_page():
     st.session_state.last_page = 'TOP'
-    common_first()
+    # common_first()
     top()
     common_last()
 
