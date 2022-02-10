@@ -10,7 +10,6 @@ def write(obj, text):
         unsafe_allow_html=True)
 
 def write_white(obj, text):
-    # st.markdown(text_css, unsafe_allow_html=True)
     obj.markdown(
 f'''
 <span class="hide">{text}</span>
@@ -46,6 +45,7 @@ def top():
 </span>
 ''', unsafe_allow_html=True)
     st.markdown(text_css, unsafe_allow_html=True)
+    st.markdown(text_input_css, unsafe_allow_html=True)
     for c in sukima1_text:
         write_white(sukima1_col, c)
     for c in sukima2_text:

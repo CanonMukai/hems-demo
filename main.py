@@ -19,8 +19,6 @@ st.set_page_config(
     layout='wide',
     initial_sidebar_state='expanded',
 )
-# st.markdown(text_css, unsafe_allow_html=True)
-# st.markdown(text_input_css, unsafe_allow_html=True)
 
 
 ############################################
@@ -194,8 +192,6 @@ def common_last():
 
 def top_page():
     st.session_state.last_page = 'TOP'
-    # st.markdown(text_css, unsafe_allow_html=True)
-    # st.markdown(text_input_css, unsafe_allow_html=True)
     common_first()
     top()
     common_last()
