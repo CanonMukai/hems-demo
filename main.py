@@ -63,7 +63,7 @@ def solve():
 
 右上のピクトグラム、いろいろと蘇りますね、かわいいですね...
 '''.format(emoji)
-    spinner_text = '計算中です...{}'.format(emoji)
+    # spinner_text = '計算中です...{}'.format(emoji)
     start_time = time.time()
     with st.spinner(spinner_text):
         hq = HemsQ()
