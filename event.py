@@ -29,16 +29,17 @@ def submit():
 '''
     requests.post('https://hemsq-event.herokuapp.com/event',
         headers={"content-type": "application/json"},
-        data=json.dumps({'name': st.session_state.event_name, 'text': text}))
+        # data=json.dumps({'name': st.session_state.event_name, 'text': text}))
+        data=json.dumps({'name': '名無しさん', 'text': text}))
     st.session_state.pages['TOP'].func()
 
 def question():
     st.write('もしよろしければ、アンケートにお答えください！')
     with st.form('question_form'):
-        name = st.text_input('ニックネーム', placeholder='なしでも大丈夫 :)',
-            key='event_name')
+        # name = st.text_input('ニックネーム', placeholder='なしでも大丈夫 :)',
+        #     key='event_name')
         how = st.multiselect(
-            'どのようにして気づかれましたか？(複数回答可)',
+            'どのようにして気づきましたか？(複数回答可)',
             options=[
                 '適当にいじってたら偶然見つけた',
                 'つよつよのダークモードを使っていてバレバレだった',
