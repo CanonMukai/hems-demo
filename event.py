@@ -18,24 +18,25 @@ def display():
     st.write('お見事！！')
     st.image('https://drive.google.com/uc?export=view&id=1W0TtWXV5O-7emlBPv5OWE3VDBN9Gr1w6&usp=sharing')
 
-def submit(name, how, message):
-    options = ', '.join(how)
+def submit():
+    options = ', '.join(st.session_state.question)
     text = f'''
 ＜どうやって？＞
 {options}
 
 ＜メッセージ＞
-{message}
+{st.session_state.event_message}
 '''
     requests.post('https://hemsq-event.herokuapp.com/event',
         headers={"content-type": "application/json"},
-        data=json.dumps({'name': name, 'text': text}))
-    st.session_state.pages['TOP'].func
+        data=json.dumps({'name': st.session_state.event_name, 'text': text}))
+    st.session_state.pages['TOP'].func()
 
 def question():
     st.write('もしよろしければ、アンケートにお答えください！')
     with st.form('question_form'):
-        name = st.text_input('ニックネーム', placeholder='なしでも大丈夫 :)')
+        name = st.text_input('ニックネーム', placeholder='なしでも大丈夫 :)',
+            key='event_name')
         how = st.multiselect(
             'どのようにして気づかれましたか？(複数回答可)',
             options=[
@@ -46,11 +47,11 @@ def question():
             ],
             key='question')
         message = st.text_area('メッセージをもらえると主が嬉しくてニヤニヤします',
-            placeholder='もちろんなしでも大丈夫 :)')
+            placeholder='もちろんなしでも大丈夫 :)',
+            key='event_message')
         st.form_submit_button(
             label='送信',
             on_click=submit,
-            args=[name, how, message]
         )
 
 sukima_text = '...お？おおおおおお？'
