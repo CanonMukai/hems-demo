@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 
 def event():
     st.text_input(
